@@ -16,11 +16,11 @@ class District(models.Model):
 
     # Methods
     def __str__(self):
-    	return("Name: " + str(self.name) + "\n" +  
-    		"registered_voters: " + str(self.registered_voters) + "\n" +  
-    		"num_representatives: " + str(self.num_representatives) + "\n" +  
-    		"blank_votes: " + str(self.blank_votes) + "\n" +  
-    		"void_votes: " + str(self.void_votes))
+    	return ("Name: " + str(self.name) + "\n" +  
+                "registered_voters: " + str(self.registered_voters) + "\n" +  
+                "num_representatives: " + str(self.num_representatives) + "\n" +  
+                "blank_votes: " + str(self.blank_votes) + "\n" +  
+                "void_votes: " + str(self.void_votes))
 
     def get_id(self):
         return self.id 

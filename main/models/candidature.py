@@ -33,4 +33,4 @@ class Candidature(models.Model):
         return self.votes 
 
     def get_district_id(self):
-        return self.distritct
+        return self.district

@@ -9,7 +9,7 @@ class Election(models.Model):
     # Fields 
     date = models.DateField()
     min_votes_threshold = models.FloatField(validators=[MinValueValidator(limit_value=0.0),
-                                                        MaxValueValidator(limit_value=100.0)])
+                                                        MaxValueValidator(limit_value=1.0)])
     type = models.ForeignKey(ElectionType, on_delete=models.CASCADE)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
