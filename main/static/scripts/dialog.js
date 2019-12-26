@@ -1,3 +1,30 @@
+
+/**
+ * Resposive HTML5 Dialog with PolyFill Fallback.
+ * 
+ * The following JavaScript code has been obtain from (https://codepen.io/manjitkarve/pen/LQovVb)
+ * and was developed by Manjit Karve. 
+ * 
+ * License:
+ * 
+ * Copyright (c) 2019 by Manjit Karve (https://codepen.io/manjitkarve/pen/LQovVb)
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software 
+ * without restriction, including without limitation the rights to use, copy, modify, merge, 
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * 1. The above copyright notice and this permission notice shall be included in all copies
+ *    or substantial portions of the Software.
+ * 
+ * 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+ *    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ *    PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ *    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+ *    CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *    OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -73,6 +100,7 @@
     }
   
     /**
+     * Determine if a given node is contained in a given node list.
      * @param {!NodeList} nodeList to search
      * @param {Node} node to find
      * @return {boolean} whether node is inside nodeList
@@ -87,6 +115,7 @@
     }
   
     /**
+     * Determine if an HTMLForm element has method="dialog".
      * @param {HTMLFormElement} el to check
      * @return {boolean} whether this form has method="dialog"
      */
@@ -98,6 +127,7 @@
     }
   
     /**
+     * 
      * @param {!HTMLDialogElement} dialog to upgrade
      * @constructor
      */
