@@ -45,6 +45,22 @@ function generateOutput(){
 }
 
 /**
+ * Hide the candidatures div.
+ */
+function hideCandidaturesDiv() {
+    let candidaturesDiv = document.getElementById("candidatures");
+    candidaturesDiv.style.display = "none";
+}
+
+/**
+ * Show the candidatures div.
+ */
+function showCandidaturesDiv() {
+    let candidaturesDiv = document.getElementById("candidatures");
+    candidaturesDiv.style.display = "flex";
+}
+
+/**
  * Update the Districts table.
  */
 function updateDistricts(){
@@ -53,7 +69,7 @@ function updateDistricts(){
     /* Remove the existing table */ 
     districtTable.remove();
 
-    /* Create a new tabele */
+    /* Create a new table */
     districtTable = document.createElement("table");
     districtTable.id = "district-inside-table";
     districtTable.innerHTML = `
@@ -68,40 +84,49 @@ function updateDistricts(){
     </tr>`;
     document.getElementById("district-table").appendChild(districtTable);
 
-    /* Insert each district in a new row */
-    districts.forEach((district, i)=>{
-        let row = document.createElement("tr");
-        row.innerHTML = `
-        <td>${district.name}</td>
-        <td>${district.voters}</td>
-        <td>${district.representatives}</td>
-        <td>${district.blank}</td>
-        <td>${district.null}</td>
-        <td><button data-id="${i}" class="view-district">Ver</td>
-        <td><button data-id="${i}" class="delete-district">Borrar</button></td>
-        `;
-        districtTable.appendChild(row);
-    });
+    if (districts.length == 0) {
+        districtTable.style.display = "none";
+        hideCandidaturesDiv();
 
-    /* Configure "View" buttons */
-    let viewButtons = document.querySelectorAll(".view-district");
-    viewButtons.forEach((button)=>{
-        button.addEventListener("click", ()=>{
-            let newCandidature = document.getElementById("new-candidature");
-            newCandidature.disabled = false;
-            newCandidature.dataset.id = button.dataset.id;
-            updateCandidatures();
+    } else { // districts.length > 0      
+        districtTable.style.display = "table";
+
+        /* Insert each district in a new row */
+        districts.forEach((district, i)=>{
+            let row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${district.name}</td>
+            <td>${district.voters}</td>
+            <td>${district.representatives}</td>
+            <td>${district.blank}</td>
+            <td>${district.null}</td>
+            <td><button data-id="${i}" class="view-district">Ver</td>
+            <td><button data-id="${i}" class="delete-district">Borrar</button></td>
+            `;
+            districtTable.appendChild(row);
         });
-    });
 
-    /* Configure "Delete" buttons */
-    let deleteButtons = document.querySelectorAll(".delete-district");
-    deleteButtons.forEach((button)=>{
-        button.addEventListener("click",()=>{
-            districts.splice(button.dataset.id, 1);
-            updateDistricts();
-        });        
-    });
+        /* Configure "View" buttons */
+        let viewButtons = document.querySelectorAll(".view-district");
+        viewButtons.forEach((button)=>{
+            button.addEventListener("click", ()=>{
+                let newCandidature = document.getElementById("new-candidature");
+                newCandidature.disabled = false;
+                newCandidature.dataset.id = button.dataset.id;
+                updateCandidatures();
+                showCandidaturesDiv();
+            });
+        });
+
+        /* Configure "Delete" buttons */
+        let deleteButtons = document.querySelectorAll(".delete-district");
+        deleteButtons.forEach((button)=>{
+            button.addEventListener("click", () =>{  
+                districts.splice(button.dataset.id, 1); 
+                updateDistricts();
+            });        
+        });
+    }   
 }
 
 /**
@@ -110,6 +135,7 @@ function updateDistricts(){
 function updateCandidatures(){
     let newCandidature = document.getElementById("new-candidature");
     let candidatureTable = document.getElementById("candidature-inside-table");
+
     /* Remove the existing table */
     candidatureTable.remove();
 
@@ -127,25 +153,36 @@ function updateCandidatures(){
 
     /* Insert each candidature of the corresponding district in a new row */
     let district_id = newCandidature.dataset.id;
-    districts[district_id].candidatures.forEach((candidature, i)=>{
-        let row = document.createElement("tr");
-        row.innerHTML = `
-        <td>${candidature.name}</td>
-        <td>${candidature.abbr}</td>
-        <td>${candidature.votes}</td>
-        <td><button data-id="${i}" class="delete-candidature">Borrar</button></td>
-        `;
-        candidatureTable.appendChild(row);
-    });
+    let candidatures = districts[district_id].candidatures;
 
-    /* Configure "Delete" buttons */
-    let deleteButtons = document.querySelectorAll(".delete-candidature");
-    deleteButtons.forEach((button)=>{
-        button.addEventListener("click",()=>{
-            districts[district_id].candidatures.splice(button.dataset.id, 1);
-            updateCandidatures();
-        });        
-    });
+    if (candidatures.length == 0) {
+        let row = document.createElement("tr");
+            row.innerHTML = `
+            <td colspan="4">No se han introducido candidaturas para esta circunscripción</td>
+            `;
+            candidatureTable.appendChild(row);
+
+    } else { //candidatures.length > 0
+        candidatures.forEach((candidature, i)=>{
+            let row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${candidature.name}</td>
+            <td>${candidature.abbr}</td>
+            <td>${candidature.votes}</td>
+            <td><button data-id="${i}" class="delete-candidature">Borrar</button></td>
+            `;
+            candidatureTable.appendChild(row);
+        });
+    
+        /* Configure "Delete" buttons */
+        let deleteButtons = document.querySelectorAll(".delete-candidature");
+        deleteButtons.forEach((button)=>{
+            button.addEventListener("click",()=>{
+                districts[district_id].candidatures.splice(button.dataset.id, 1);
+                updateCandidatures();
+            });        
+        });
+    }    
 }
 
 /**

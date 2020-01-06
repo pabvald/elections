@@ -54,7 +54,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "pattern": "^([a-z]|[A-Z]){1,120}$"
+            "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1,120}$"
           },
           "voters": {
             "type": "number",
@@ -89,12 +89,12 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "pattern": "([a-z]|[A-Z]){1}([a-z]|[A-Z]|[0-9]|-|_){0,69}",
+                  "pattern": "([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([a-zA-A0-9À-ÿ\u00f1\u00d1]-_){0,69}",
                   "maxLength": 70
                 },
                 "abbr": {
                   "type": "string",
-                  "pattern": "([a-z]|[A-Z]){1}([a-z]|[A-Z]|[0-9]|-|_){0,5}"
+                  "pattern": "([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([a-zA-A0-9À-ÿ\u00f1\u00d1]-_){0,5}"
                 },
                 "votes": {
                   "type": "number",

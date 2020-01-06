@@ -29,7 +29,7 @@
 
 #election-builder #candidatures {
     flex: 1;
-    display: flex;
+    display: none;
     flex-flow: column;
     padding: 20px;
 }
