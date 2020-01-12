@@ -57,7 +57,7 @@ main {
 }
 
     /* Main Sidebar */ 
-    main section#block_sidebar {
+    main section#block-sidebar {
         display: flex;
         flex-flow: column;
         align-items: center;
@@ -65,7 +65,7 @@ main {
     }
 
     /* Main Content */
-    main section#block_content {
+    main section#block-content  {
         flex:1;
         height: 100%;
         display: flex;
