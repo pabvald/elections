@@ -7,9 +7,66 @@ let CAND_ABRV_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([\wÀ-ÿ\u00f1\u00
 /* Error messages */
 let CAND_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 70 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
 let CAND_ABRV_NAME_ERR_MSG = "'Abreviatura' debe contener entre 1 y 6 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
-let CAND_VOTES_ERR_MSG = "'Votos' debe ser un número mayor o igual que 0";
+let CAND_NEG_VOTES_ERR_MSG = "'Votos' debe ser un número mayor o igual que 0";
+let CAND_TOP_VOTES_ERR_MSG = "'Votos' debe ser menor o igual que el número de votos disponibles en la circunscripción";
 let CAND_UNIQUE_NAME_ERR_MSG = "Ya existe una candidatura con ese nombre";
 let CAND_UNIQUE_ABBRV_ERR_MSG = "Ya existe una candidatura con esa abreviatura";
+
+
+/**
+ * Add the corresponding functionality to all dialog-candidature's 
+ * elements.
+ */
+function configureNewCandidatureDialog() {
+    // Configure the "New candidature" button, which opens the dialog
+    let dialogCandidature = document.getElementById("dialog-candidature");
+    let newCandidature = document.getElementById("new-candidature");
+    newCandidature.addEventListener("click", ()=>{
+        dialogCandidature.showModal();
+    });
+
+    // Configure the "Add candidature" button
+    document.getElementById("add-candidature").addEventListener("click", () => {
+        districts[showingDistrict].candidatures.push(getCandidature());
+        updateCandidatures();
+        dialogCandidature.close();
+        clearCandidatureDialog();
+    });
+
+    // Configure the "Cancel" button
+    document.getElementById("cancel-candidature").addEventListener("click", ()=>{
+       dialogCandidature.close(); 
+    });
+
+    // Add event listeners to the dialog's fields 
+    document.getElementById("candidature-name").addEventListener("input", validateCandName);
+    document.getElementById("candidature-abbrv").addEventListener("input", validateCandAbbrvName);
+    document.getElementById("candidature-votes").addEventListener("input", validateCandVotes);
+}
+
+/**
+ * Clears the candidature dialog's fields.
+ */
+function clearCandidatureDialog() {
+    document.getElementById("candidature-name").value = "";
+    document.getElementById("candidature-abbrv").value = "";
+    document.getElementById("candidature-votes").value = "";
+    disableElement("add-candidature");
+}
+
+/**
+ * Obtains the content of the 'New candidature' dialog
+ * as an object.
+ * @return {Object} new candidature to be added.
+ */
+function getCandidature() {
+    let candidature = {
+        name: val("candidature-name"),
+        abbr: val("candidature-abbrv"),
+        votes: ival("candidature-votes")
+    }
+    return candidature;
+}
 
 /**
  * @return {Boolean} - candidature's name matches pattern
@@ -26,10 +83,32 @@ function validCandAbrvName() {
 }
 
 /**
+ * Obtains the avaiblable votes in a district.
+ * @param {Number} - index of the district
+ */
+function availableVotes(i) {
+    let district = districts[i];
+    let candidatures = district.candidatures;
+    let availableVotes = district.voters - district.blank - district.null;
+
+    candidatures.forEach((c) => {
+        availableVotes -= c.voters;
+    })
+    return availableVotes;
+}   
+
+/**
  * @return {Boolean} - candidature's votes >= 0
  */
 function validCandVotes() {
     return ival("candidature-votes") >= 0;
+}
+
+/**
+ * @return {Boolean} - candidature's votes <= available votes in its district
+ */
+function validCandVotes2() {
+    return ival("candidature-votes") <= availableVotes(showingDistrict);
 }
 
 /**
@@ -137,7 +216,10 @@ function validateCandAbbrvName() {
 function validateCandVotes() {
     if (!validCandVotes()) {
         addInvalidClass("candidature-votes");
-        setCandidatureDialogError(CAND_VOTES_ERR_MSG);
+        setCandidatureDialogError(CAND_NEG_VOTES_ERR_MSG);
+    } else if(!validCandVotes2()) {
+        addInvalidClass("candidature-votes");
+        setCandidatureDialogError(CAND_TOP_VOTES_ERR_MSG);
     } else {
         removeInvalidClass("candidature-votes");
         clearCandidatureDialogError();
