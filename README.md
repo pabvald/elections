@@ -1,5 +1,4 @@
-# Planificación y Diseño de Sistemas Computacionales
-## Grado en Ingeniería Informática 
+#pdsc-19-20-02 Pablo Valdunciel Sánchez
 
 ### 1. Estructura del proyecto 
 
