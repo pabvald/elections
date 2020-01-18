@@ -1,6 +1,6 @@
 
 /* Patterns */
-let DISTRICT_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1,120}$/;
+let DISTRICT_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1 ]){1,120}$/;
 
 /* Error messages */
 let DISTRICT_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 120 letras,\n mayúsculas o minúsculas";
@@ -26,21 +26,18 @@ function setDistrictDialogError(error) {
     districtError.innerHTML = error;
 }
 
-
 /**
  * @return {Boolean} - district's name matches pattern
  */
 function validDistrictName() {
-    let districtName = val("district-name");
-    return DISTRICT_NAME_PATTERN.test(districtName);
+    return DISTRICT_NAME_PATTERN.test(val("district-name"));
 }
 
 /**
  * @return {Boolean} - district's voters are >= 1
  */
 function validDistrictVoters() {
-    let districtVoters = ival("district-voters");
-    return districtVoters >= 1;
+    return ival("district-voters") >= 1;
 }
 
 /**
@@ -57,16 +54,14 @@ function validDistrictRepresentatives() {
  * @return {Boolean} - district's null votes are >= 0
  */
 function validDistrictNull() {
-    let districtVoters = ival("district-null");
-    return districtVoters >= 0;
+    return ival("district-null") >= 0;
 }
 
 /**
  * @return {Boolean} - district's blank votes are >= 0
  */
 function validDistrictBlank() {
-    let districtVoters = ival("district-blank");
-    return districtVoters >= 0;
+    return ival("district-blank") >= 0;
 }
 
 /**
@@ -159,5 +154,3 @@ function validateDistrictBlank() {
     }
     validateDistrict();
 }
-
-

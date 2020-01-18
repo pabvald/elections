@@ -1,6 +1,39 @@
 
 let districts = []; // Contains all districts
 
+
+/**
+ * Obtains the content of the 'New district' dialog
+ * as an object.
+ * @return {Object} new district to be added.
+ */
+function getDistrict() {
+    let district = {
+        name: val("district-name"),
+        voters: ival("district-voters"),
+        representatives: ival("district-representatives"),
+        blank: ival("district-blank"),
+        null: ival("district-null"),
+        candidatures: []
+    };
+
+    return district;
+}
+
+/**
+ * Obtains the content of the 'New candidature' dialog
+ * as an object.
+ * @return {Object} new candidature to be added.
+ */
+function getCandidature() {
+    let candidature = {
+        name: val("candidature-name"),
+        abbr: val("candidature-abbrv"),
+        votes: ival("candidature-votes")
+    }
+    return candidature;
+}
+
 /**
  * Obtain the content of all the input fields.
  * @return {Object}
@@ -64,7 +97,7 @@ function updateDistricts(){
     } else { // districts.length > 0      
         districtTable.style.display = "table";
 
-        /* Insert each district in a new row */
+        // Insert each district in a new row
         districts.forEach((district, i)=>{
             let row = document.createElement("tr");
             row.innerHTML = `
@@ -79,7 +112,7 @@ function updateDistricts(){
             districtTable.appendChild(row);
         });
 
-        /* Configure "View" buttons */
+        // Configure "View" buttons
         let viewButtons = document.querySelectorAll(".view-district");
         viewButtons.forEach((button)=>{
             button.addEventListener("click", ()=>{
@@ -91,7 +124,7 @@ function updateDistricts(){
             });
         });
 
-        /* Configure "Delete" buttons */
+        // Configure "Delete" buttons
         let deleteButtons = document.querySelectorAll(".delete-district");
         deleteButtons.forEach((button)=>{
             button.addEventListener("click", () =>{  
@@ -109,10 +142,10 @@ function updateCandidatures(){
     let newCandidature = document.getElementById("new-candidature");
     let candidatureTable = document.getElementById("candidature-inside-table");
 
-    /* Remove the existing table */
+    // Remove the existing table
     candidatureTable.remove();
 
-    /* Create a new table */
+    // Create a new table
     candidatureTable = document.createElement("table");
     candidatureTable.id = "candidature-inside-table";
     candidatureTable.innerHTML = `
@@ -124,7 +157,7 @@ function updateCandidatures(){
     </tr>`;
     document.getElementById("candidature-table").appendChild(candidatureTable);
 
-    /* Insert each candidature of the corresponding district in a new row */
+    // Insert each candidature of the corresponding district in a new row
     let district_id = newCandidature.dataset.id;
     let candidatures = districts[district_id].candidatures;
 
@@ -147,7 +180,7 @@ function updateCandidatures(){
             candidatureTable.appendChild(row);
         });
     
-        /* Configure "Delete" buttons */
+        // Configure "Delete" buttons
         let deleteButtons = document.querySelectorAll(".delete-candidature");
         deleteButtons.forEach((button)=>{
             button.addEventListener("click",()=>{
@@ -159,36 +192,18 @@ function updateCandidatures(){
 }
 
 /**
- * Obtains the content of the 'New district' dialog
- * as an object.
- * @return {Object} new district to be added.
- */
-function getDistrict() {
-    let district = {
-        name: val("district-name"),
-        voters: ival("district-voters"),
-        representatives: ival("district-representatives"),
-        blank: ival("district-blank"),
-        null: ival("district-null"),
-        candidatures: []
-    };
-
-    return district;
-}
-
-/**
  * Add the corresponding functionality to all the 
  * dialog-disctrict's elements.
  */
 function configureNewDistrictDialog() {
 
-    /* Configure the "New district" button, which opens the dialog */   
+    // Configure the "New district" button, which opens the dialog   
     let dialogDistrict = document.getElementById("dialog-district");
     document.getElementById("new-district").addEventListener("click",()=>{
         dialogDistrict.showModal();
     });
 
-    /* Configure the "Add district" button */
+    // Configure the "Add district" button
     document.getElementById("add-district").addEventListener("click",()=>{
         let newDistrict = getDistrict();
         districts.push(newDistrict);
@@ -196,22 +211,17 @@ function configureNewDistrictDialog() {
         dialogDistrict.close();       
     });
     
-    /* Configure to the "Cancel" button */
+    // Configure to the "Cancel" button
     document.getElementById("cancel-district").addEventListener("click", ()=>{
         dialogDistrict.close();
     });
 
-   /* Add event listeners to the dialog's fields */
-   document.getElementById("district-name").addEventListener("input", validateDistrictName);
-   document.getElementById("district-name").addEventListener("focusout", validateDistrictName);
-   document.getElementById("district-voters").addEventListener("input", validateDistrictVoters);
-   document.getElementById("district-voters").addEventListener("focusout", validateDistrictVoters);
-   document.getElementById("district-representatives").addEventListener("input", validateDistrictRepresentatives);
-   document.getElementById("district-representatives").addEventListener("focusout", validateDistrictRepresentatives);
-   document.getElementById("district-null").addEventListener("input", validateDistrictNull);
-   document.getElementById("district-null").addEventListener("focusout", validateDistrictNull);
-   document.getElementById("district-blank").addEventListener("input", validateDistrictBlank);
-   document.getElementById("district-blank").addEventListener("focusout", validateDistrictBlank);
+    // Add event listeners to the dialog's fields
+    document.getElementById("district-name").addEventListener("input", validateDistrictName);
+    document.getElementById("district-voters").addEventListener("input", validateDistrictVoters);
+    document.getElementById("district-representatives").addEventListener("input", validateDistrictRepresentatives);
+    document.getElementById("district-null").addEventListener("input", validateDistrictNull);
+    document.getElementById("district-blank").addEventListener("input", validateDistrictBlank);
 }
 
 /**
@@ -220,31 +230,30 @@ function configureNewDistrictDialog() {
  */
 function configureNewCandidatureDialog() {
 
-    /* Configure the "New candidature" button, which opens the dialog */
-    let newCandidature = document.getElementById("new-candidature");
+    // Configure the "New candidature" button, which opens the dialog
     let dialogCandidature = document.getElementById("dialog-candidature");
+    let newCandidature = document.getElementById("new-candidature");
     newCandidature.addEventListener("click", ()=>{
         dialogCandidature.showModal();
     });
 
-    /* Configure the "Add candidature" button */
-    let addCandidature = document.getElementById("add-candidature");
-    addCandidature.addEventListener("click", () => {
-        let candidature_id = newCandidature.dataset.id;
-        districts[candidature_id].candidatures.push({
-            name: val("candidature-name"),
-            abbr: val("candidature-abbrv"),
-            votes: ival("candidature-votes")
-        });
+    // Configure the "Add candidature" button
+    document.getElementById("add-candidature").addEventListener("click", () => {
+        let dataset = newCandidature.dataset.id;
+        districts[dataset].candidatures.push(getCandidature());
         updateCandidatures();
         dialogCandidature.close();
     });
 
-    /* Configure the "Cancel" button */
-    let cancelCandidature = document.getElementById("cancel-candidature");
-    cancelCandidature.addEventListener("click", ()=>{
+    // Configure the "Cancel" button
+    document.getElementById("cancel-candidature").addEventListener("click", ()=>{
        dialogCandidature.close(); 
     });
+
+    // Add event listeners to the dialog's fields 
+    document.getElementById("candidature-name").addEventListener("input", validateCandName);
+    document.getElementById("candidature-abbrv").addEventListener("input", validateCandAbbrvName);
+    document.getElementById("candidature-votes").addEventListener("input", validateCandVotes);
 }
 
 /**
