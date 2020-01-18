@@ -15,5 +15,12 @@
 }
 
 .error {
-    color: rgb(141, 41, 41);
+    color: red;
 }
+
+
+.invalid-field {
+    border-color: red;
+}
+  
+  

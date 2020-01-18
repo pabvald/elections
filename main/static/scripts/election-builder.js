@@ -2,33 +2,6 @@
 let districts = []; // Contains all districts
 
 /**
- * Get the value of an HTML ELement given its id.
- * @param {Number} id of an HTML Element
- * @return {Object} the value of the  HTML Element
- */
-function val(id){
-    return document.getElementById(id).value;
-}
-
-/**
- * Get the value, as an integer, of an HTML Element given its id.
- * @param {Number} id of an HTML Element
- * @return {Number} the value of the HTML Element
- */
-function ival(id){
-    return parseInt(val(id));
-}
-
-/**
- * Get the value, as a float, of an HTML Element given its id.
- * @param {Number} id of an HTML Element
- * @return {Number} the value of the HTML Element
- */
-function fval(id){
-    return parseFloat(val(id));
-}
-
-/**
  * Obtain the content of all the input fields.
  * @return {Object}
  */
@@ -186,38 +159,59 @@ function updateCandidatures(){
 }
 
 /**
+ * Obtains the content of the 'New district' dialog
+ * as an object.
+ * @return {Object} new district to be added.
+ */
+function getDistrict() {
+    let district = {
+        name: val("district-name"),
+        voters: ival("district-voters"),
+        representatives: ival("district-representatives"),
+        blank: ival("district-blank"),
+        null: ival("district-null"),
+        candidatures: []
+    };
+
+    return district;
+}
+
+/**
  * Add the corresponding functionality to all the 
  * dialog-disctrict's elements.
  */
 function configureNewDistrictDialog() {
 
-    /* Configure the "New district" button, which opens the dialog */
-    let newDistrict = document.getElementById("new-district"); 
+    /* Configure the "New district" button, which opens the dialog */   
     let dialogDistrict = document.getElementById("dialog-district");
-    newDistrict.addEventListener("click",()=>{
+    document.getElementById("new-district").addEventListener("click",()=>{
         dialogDistrict.showModal();
     });
 
     /* Configure the "Add district" button */
-    let addDistrict = document.getElementById("add-district");
-    addDistrict.addEventListener("click",()=>{
-        districts.push({
-            name: val("district-name"),
-            voters: ival("district-voters"),
-            representatives: ival("district-representatives"),
-            blank: ival("district-blank"),
-            null: ival("district-null"),
-            candidatures: []
-        });
+    document.getElementById("add-district").addEventListener("click",()=>{
+        let newDistrict = getDistrict();
+        districts.push(newDistrict);
         updateDistricts();
-        dialogDistrict.close();
+        dialogDistrict.close();       
     });
     
     /* Configure to the "Cancel" button */
-    let cancelDistrict = document.getElementById("cancel-district");
-    cancelDistrict.addEventListener("click", ()=>{
+    document.getElementById("cancel-district").addEventListener("click", ()=>{
         dialogDistrict.close();
     });
+
+   /* Add event listeners to the dialog's fields */
+   document.getElementById("district-name").addEventListener("input", validateDistrictName);
+   document.getElementById("district-name").addEventListener("focusout", validateDistrictName);
+   document.getElementById("district-voters").addEventListener("input", validateDistrictVoters);
+   document.getElementById("district-voters").addEventListener("focusout", validateDistrictVoters);
+   document.getElementById("district-representatives").addEventListener("input", validateDistrictRepresentatives);
+   document.getElementById("district-representatives").addEventListener("focusout", validateDistrictRepresentatives);
+   document.getElementById("district-null").addEventListener("input", validateDistrictNull);
+   document.getElementById("district-null").addEventListener("focusout", validateDistrictNull);
+   document.getElementById("district-blank").addEventListener("input", validateDistrictBlank);
+   document.getElementById("district-blank").addEventListener("focusout", validateDistrictBlank);
 }
 
 /**
@@ -320,6 +314,7 @@ function registerDialogs() {
         dialogPolyfill.registerDialog(dialog);
     });
 }
+
 
 /**
  * MAIN PROGRAMM

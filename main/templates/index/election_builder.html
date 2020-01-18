@@ -31,23 +31,26 @@
                     </div>
                     <div>
                         <label for="district-voters">Censo: </label>
-                        <input type="number" id="district-voters">
+                        <input type="number" id="district-voters" min="1">
                     </div>
                     <div>
                         <label for="district-representatives">Escaños: </label>
-                        <input type="number" id="district-representatives">
+                        <input type="number" id="district-representatives" min="1">
                     </div>
                     <div>
                         <label for="district-blank">Votos en blanco: </label>
-                        <input type="number" id="district-blank">
+                        <input type="number" id="district-blank" min="0">
                     </div>
                     <div>
                         <label for="district-divl">Votos nulos: </label>
-                        <input type="number" id="district-null">
+                        <input type="number" id="district-null" min="0">
+                    </div>
+                    <div>
+                        <p id="dialog-district-error" class="error"></p>
                     </div>
                     <div class="button-centering">
                             <button id="cancel-district" class="base_button orange" >Cancelar</button>
-                            <button id="add-district" class="base_button dark_blue">Añadir</button>
+                            <button id="add-district" class="base_button dark_blue" disabled>Añadir</button>
                     </div>
                 </div>
                
@@ -72,7 +75,10 @@
                     </div>
                     <div>
                         <label for="candidature-votes">Votos: </label>
-                        <input type="text" id="candidature-votes">
+                        <input type="number" id="candidature-votes" min="0">
+                    </div>
+                    <div>
+                        <p id="dialog-candidature-error" class="error"></p>
                     </div>
                     <div class="button-centering">
                         <button id="cancel-candidature" class="base_button orange" >Cancelar</button>

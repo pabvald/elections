@@ -12,10 +12,6 @@
     cursor: pointer;
 }
 
-.base_button:disabled {
-    cursor: not-allowed;
-}
-
 .base_button.orange {
     background-color: #F7A072; 
 }
@@ -33,6 +29,10 @@
     background-color: #EDDEA4;
 }
 
+.base_button:disabled {
+    cursor: not-allowed;
+    background-color: grey; 
+}
 
 .text_button {
     cursor: pointer;
