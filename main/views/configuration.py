@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from main.services.device_service import DeviceService
+from main.services import DeviceService
 from main.models import Device
 from main.forms import ConfigurationForm
 

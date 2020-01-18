@@ -62,7 +62,7 @@ function uploadFile() {
         reader.onload = function(e) {
             election = JSON.parse(reader.result);
             
-            if (validElection(election)) {
+            if (validElectionObject(election)) {
                 generateInput(election);
                 uploadDialog.close();
             } else {
@@ -77,7 +77,7 @@ function uploadFile() {
  * Validates an election object 
  * @param {*} election an election in the export/import format
  */
-function validateElectionObject(election) {
+function validElectionObject(election) {
     //TODO
     return true;
 }

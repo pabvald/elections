@@ -92,8 +92,9 @@ function availableVotes(i) {
     let availableVotes = district.voters - district.blank - district.null;
 
     candidatures.forEach((c) => {
-        availableVotes -= c.voters;
-    })
+        availableVotes -= c.votes;
+    });
+
     return availableVotes;
 }   
 

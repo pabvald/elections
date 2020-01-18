@@ -2,7 +2,7 @@ from main.models import District, Candidature
 from django.shortcuts import get_object_or_404
 import numpy as np
 
-class DistrictService:	
+class DistrictService():	
 
 	def create_district(self, name, registered_voters, num_representatives, blank_votes, void_votes, election):
 		district = District(name=name,

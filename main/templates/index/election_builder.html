@@ -104,6 +104,7 @@
         </div>
         <dialog id="load-dialog" class="democracy-dialog">
             <div class="democracy-dialog-content">
+                {% csrf_token %}            
                 <input type="file" name="file" id="file" accept=".json">
                 <input type="hidden" name="method" value="form">
                 <div>
@@ -112,8 +113,8 @@
                 <br>
                 <div class="button-centering">
                     <button id="cancel-load" class="base-button orange" >Cancelar</button>
-                    <button id="upload" class="base-button dark-blue" type="submit" >Subir fichero</button>
-                </div>   
+                    <button id="upload" class="base-button dark-blue" >Subir fichero</button>
+                </div>  
             <div>  
         </dialog>
     </div>

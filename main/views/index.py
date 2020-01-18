@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from main.services.device_service import DeviceService
-from main.services.file_service import FileService
+from main.services import DeviceService, FileService
 from main.forms import IndexForm
 
 import json
@@ -31,6 +30,8 @@ class IndexView(TemplateView):
             data = request.FILES["file"].read()
             data_json = json.loads(data)
             file_service = FileService()
+            
+            print(data_json)
             
             if file_service.is_valid(data_json):
                 election_id = device_service.add_election(data_json)

@@ -1,6 +1,6 @@
 from main.models import Device, Election
 from .election_service import ElectionService
-from .district_service import DistrictService
+from .district_service import  DistrictService
 from .candidature_service import CandidatureService
 import datetime
 
@@ -21,7 +21,7 @@ class DeviceService():
         # user_id contains a valid device id
         self.__device = Device.objects.get(id=user_id)
 
-        
+    
     @property
     def device(self):
         return self.__device

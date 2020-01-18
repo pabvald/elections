@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-#import Election, District, Candidature
 
 class Device(models.Model):
     """Device model"""
