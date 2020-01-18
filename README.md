@@ -1,12 +1,23 @@
 # Planificación y Diseño de Sistemas Computacionales
 ## Grado en Ingeniería Informática 
 
-Para ejecutar el proyecto hace falta instalar Docker y Docker Compose.
+### 1. Estructura del proyecto 
 
-Una vez instalado y clonado el repositorio, ejecutar lo siguiente:
+
+### 2. Ejecución del sistema
+Para ejecutar el proyecto hace falta instalar 
+- Docker (https://docs.docker.com/install/)
+- Docker Compose (https://docs.docker.com/compose/install/)
+
+Una vez instalados y clonado el repositorio, es necesario ejecutar los siguientes pasos para arrancar el sistema:
+
+1. Acceder a la carpeta del repositorio
+2. Ejecutar el comando
 
 ```
 docker-compose up --build
 ```
-
-Y acceder al navegador localhost:8080
+3. Abrir el navegador e ir a la dirección
+```
+localhost:8080
+```
