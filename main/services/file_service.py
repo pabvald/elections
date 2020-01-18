@@ -3,14 +3,7 @@ from jsonschema import validate
 import os
 
 class FileService():
-
-	def is_valid(self, election):
-		'''
-		Validates the election object with the json
-		schema for an election
-		'''
-
-		schema = {
+	schema = {
 			      "$schema": "http://json-schema.org/draft-07/schema#",
 			      "title": "Import/Export election file",
 			      "description": "File used to import/export all election data",
@@ -121,7 +114,12 @@ class FileService():
 			        }
 			      }
 			    }
-
+				
+	def is_valid(self, election):
+		'''
+		Validates the election object with the json
+		schema for an election
+		'''
 		try:
 			validate(election, schema=schema)
 		except:

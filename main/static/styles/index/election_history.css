@@ -1,6 +1,6 @@
 
 /* Elections history */
-#election_history_container {
+#election-history-container {
     flex: 1;
     display: flex;
     flex-flow: column;
@@ -12,7 +12,7 @@
  } 
  
  
- #election_history_list {
+ #election-history-list {
      padding: 0;
      flex: 1;
      display: flex;
@@ -23,14 +23,14 @@
  }
  
      /* Election card */
-     .election_card {
+     .election-card {
          display: flex;
          flex-flow: column;
          border: none;
          margin: 15px;
          padding: 0;
      }
-         .election_card_header {        
+         .election-card-header {        
              background: #F7A072 ;
              text-align: center;
              color: rgb(2, 84, 92);
@@ -42,7 +42,7 @@
              padding: 5px 0;
          }
  
-         .election_card_body {
+         .election-card-body {
              flex: 1;
              display: flex;
              flex-flow: column;
@@ -50,14 +50,14 @@
              border-radius: 0 0 5px 5px;
          }
  
-             .election_card_date{
+             .election-card-date{
                  margin: 0;
                  padding: 5px 10px;
                  font-size: 10pt;
              
              }
  
-             .election_card_type {
+             .election-card-type {
                  margin: 0;
                  padding: 5px 10px;
                  font-size: 10pt;        

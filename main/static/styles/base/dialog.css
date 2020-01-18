@@ -40,6 +40,8 @@
 .democracy-dialog-content {
   display: flex;
   flex-flow: column;
+  max-width: 300px;
+  width: 300px;
 }
 
 .democracy-dialog-content div {

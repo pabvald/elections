@@ -2,15 +2,15 @@
 {%load static %}
 
 {%block content %}    
-    <div id="configuration_content">   
-        <div class="redirect_index_container">
-            <a href="/" class="base_button orange"> < Inicio </a>
+    <div id="configuration-content">   
+        <div class="redirect-index-container">
+            <a href="/" class="base-button orange"> < Inicio </a>
         </div>   
 
-        <div id="decorator_container">
+        <div id="decorator-container">
             <h1>Configuración por defecto</h1>
-            <div id="configuration_form_container">           
-                <form id="configuration_form" method="POST" class="democracy-form">
+            <div id="configuration-form-container">           
+                <form id="configuration-form" method="POST" class="democracy-form">
                     {% csrf_token %}
                     <p>
                         <label for="{{form.default_min_votes_threshold.id_for_label }}">
@@ -30,17 +30,17 @@
                     {% endif %}
                     {%if saved == "success" %}
                         <div class="success">
-                                <strong>La configuración se ha guardado con éxito.</strong>
+                            <strong>La configuración se ha guardado con éxito.</strong>
                         </div>
                     {%endif %}
                     {%if saved == "error" %}
                         <div class="error">
-                                <strong>Lo sentimos. Hubo un problema al guardar la configuración. Inténtelo de nuevo más tarde.</strong>
+                            <strong>Lo sentimos. Hubo un problema al guardar la configuración. Inténtelo de nuevo más tarde.</strong>
                         </div>
                     {%endif %}
 
-                    <div id="configuration_button_container">
-                        <input id="submit_input" type="submit" class="base_button dark_blue" value="Guardar">        
+                    <div id="configuration-button-container">
+                        <input id="submit-input" type="submit" class="base-button dark-blue" value="Guardar">        
                     </div>      
                 </form>
             </div>

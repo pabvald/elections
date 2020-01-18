@@ -1,11 +1,11 @@
-#configuration_content {
+#configuration-content {
     flex:1;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
 }
 
-#decorator_container {
+#decorator-container {
     flex:1;
     display: flex;
     flex-flow: column;
@@ -14,11 +14,11 @@
     align-items: center;
 }
 
-#decorator_container h1 {
+#decorator-container h1 {
     font-size: 18pt;
 }
 
-#configuration_form_container {
+#configuration-form-container {
     display: flex;
     flex-flow: column;
     border: 3px solid #F7A072;
@@ -28,7 +28,7 @@
     background-color: rgba(237, 222, 164, 0.658) ;
 }
 
-#configuration_form {
+#configuration-form {
     flex: 1;
     display: flex;
     flex-flow: column;
@@ -36,7 +36,7 @@
     padding: 25px;
 }
 
-#configuration_button_container {
+#configuration-button-container {
     display: flex;
     flex-flow: row;
     justify-content: center;
@@ -45,7 +45,7 @@
 }
 
 
-#submit_input {
+#submit-input {
     height: fit-content;
     margin: 20px 20px 20px 0;
 }

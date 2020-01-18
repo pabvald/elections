@@ -1,19 +1,19 @@
-<div id="election_history_container">
+<div id="election-history-container">
     <h1>Historial</h1>
     {%if history|length == 0 %} 
         <p>No hay entradas en su historial</p>
     {% else %}
-        <div id="election_history_list">
+        <div id="election-history-list">
             {% for election in history %}               
-                <div class="election_card">
-                    <a class="election_card_header" href="/results/{{ election.id }}">
+                <div class="election-card">
+                    <a class="election-card-header" href="/results/{{ election.id }}">
                         Elección {{forloop.counter}}
                     </a>
-                    <div class="election_card_body">
-                        <span class="election_card_date">
+                    <div class="election-card-body">
+                        <span class="election-card-date">
                             <b>Fecha:</b> {{election.date}}
                         </span>
-                        <span class="election_card_type">
+                        <span class="election-card-type">
                                 <b>Tipo:</b> {{election.type}}
                         </span>
                     </div>                    
