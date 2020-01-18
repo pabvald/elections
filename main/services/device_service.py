@@ -5,8 +5,13 @@ from .candidature_service import CandidatureService
 import datetime
 
 class DeviceService():
+    """ DeviceService class. Provides all the funcionality the Device model """
+
 
     def __init__(self, request):
+        """ Identifies the device which has made a request. Creates a new Device
+            model if one doesn't exists yet """
+
         try:
             user_id = request.session["user_id"]
 
@@ -26,11 +31,14 @@ class DeviceService():
     def device(self):
         return self.__device
         
+
     def get_id(self):
         return self.__device.get_id()
 
+
     def get_default_configuration(self):
         return self.__device.get_default_min_votes_threshold()
+
 
     def get_execution_history(self):
         try:
@@ -42,6 +50,8 @@ class DeviceService():
 
 
     def modify_default_configuration(self, new_min_votes_threshold):
+        """ Modifies the default configuration of the corresponding device """
+
         try:
             self.__device.set_default_min_votes_threshold(new_min_votes_threshold)
             self.__device.save()
@@ -49,7 +59,10 @@ class DeviceService():
         except:
             pass
 
+
     def add_election(self, election_data):
+        """ Creates a new Election and saves it the corresponding device's history """
+        
         device = self.__device 
         election_service = ElectionService()
         district_service = DistrictService()

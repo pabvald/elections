@@ -3,12 +3,13 @@ from jsonschema import validate
 import os
 
 class FileService():
-			
+	""" FileService class. Provides all the functionality neccesary to manage 
+	   	files """
+
+		   
 	def is_valid(self, election):
-		'''
-		Validates the election object with the json
-		schema for an election
-		'''
+		""" Validates the election object with the json
+		schema for an election """
 
 		schema = {
 			      "$schema": "http://json-schema.org/draft-07/schema#",

@@ -2,9 +2,13 @@ from main.models import District, Candidature
 from django.shortcuts import get_object_or_404
 import numpy as np
 
-class DistrictService():	
+class DistrictService():
+	""" DistrictService class. Provides all the functionality related to the District model """
+
 
 	def create_district(self, name, registered_voters, num_representatives, blank_votes, void_votes, election):
+		""" Creates a new District and saves it into the database """
+
 		district = District(name=name,
 							registered_voters=registered_voters,
 							num_representatives=num_representatives,
@@ -16,11 +20,15 @@ class DistrictService():
 
 
 	def get_candidatures(self, district_pk):
+		""" Gets all the Candidatures of a particular District """
+
 		candidatures = Candidature.objects.filter(district = district_pk)
 		return candidatures
 
+
 	def get_seat_distribution(self, district, min_votes_threshold):
-		""" Obtains the seat distribution of a district applying the D'hont system"""
+		""" Obtains the seat distribution of a district applying the D'hont system """
+
 		candidatures = []
 		candidatures_query = self.get_candidatures(district.get_id())
 		total_votes = np.sum([a.get_votes() for a in candidatures_query]) + district.get_blank_votes() + district.get_void_votes()

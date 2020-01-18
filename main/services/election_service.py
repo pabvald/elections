@@ -4,8 +4,13 @@ from .district_service import DistrictService
 import numpy as np
 
 class ElectionService():
+    """ ElectionService class. Provides all the functionality related to 
+        the Election model """
+
 
     def create_election(self, type, date, device, min_votes_threshold):
+        """Creates a new Election and saves it to the database"""
+
         election_type = ElectionType.objects.filter(name=type)[0]
         election = Election(type=election_type,
                             date=date,
@@ -14,11 +19,17 @@ class ElectionService():
         election.save()
         return election
     
+
     def get_districts(self, election_pk):
+        """Gets the Districts of an particular Election"""
+
         districts = District.objects.filter(election=election_pk)
         return districts
 
+
     def get_seat_distribution(self, election_pk):
+        """Computes the seat distribution of an election applying the D'Hont system """
+
         district_service = DistrictService()
         election = get_object_or_404(Election, pk=election_pk)
         districts = self.get_districts(election_pk)
@@ -29,7 +40,7 @@ class ElectionService():
         for d in districts:
             seat_distribution, special_votes = district_service.get_seat_distribution(d, election.get_min_votes_threshold())
 
-            #Order the candidatures by their number of votes
+            # Order the candidatures by their number of votes
             seat_distribution.sort(key=lambda a:a["votes"], reverse=True)
 
             district_results.append({"name" : d.get_name(),
@@ -54,11 +65,11 @@ class ElectionService():
             total_special_votes["blank"] += special_votes["blank"]
             total_special_votes["void"] += special_votes["void"]
 
-        #Order the districts in alphabetical order
+        # Order the districts in alphabetical order
         district_results.sort(key=lambda a:a["name"])
             
 
-        #Compute the total number of votes and assign the percentages
+        # Compute the total number of votes and assign the percentages
         total_votes = np.sum([totals_count[k]["votes"] for k in totals_count])+total_special_votes["blank"] + total_special_votes["void"]
         for k in totals_count:
             totals_count[k]["votes_percentage"] = totals_count[k]["votes"]/total_votes*100

@@ -31,10 +31,7 @@ class IndexView(TemplateView):
             data_json = json.loads(data)
             file_service = FileService()
             
-            print("-----------------------------------------------------")
-
             if file_service.is_valid(data_json):
-                print("------- VALID ------------")
                 election_id = device_service.add_election(data_json)
                 if request.POST["method"] == "ajax":
                     return HttpResponse(f"{election_id}")
