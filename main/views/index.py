@@ -38,6 +38,7 @@ class IndexView(TemplateView):
                     return HttpResponse(f"{election_id}")
                 else:
                     return redirect(f"/results/{election_id}/")
+                    
         return self.render_to_response(context)
 
         

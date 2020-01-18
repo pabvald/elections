@@ -103,15 +103,15 @@
             <button id="load" class="base_button orange">Cargar fichero</button>
         </div>
         <dialog id="load-dialog" class="democracy-dialog">
-            <form enctype="multipart/form-data" method="POST" action="/">
-                {% csrf_token %}
-                <input type="file" name="file" id="file">
-                <input type="hidden" name="method" value="form">
-                <br>
-                <div class="button-centering">
-                    <button id="cancel-load" class="base_button orange" >Cancelar</button>
-                    <input class="base_button dark_blue" type="submit" value="Subir fichero">
-                </div>                    
-            </form>
+            <input type="file" name="file" id="file" accept=".json">
+            <input type="hidden" name="method" value="form">
+            <div>
+                <p id="dialog-upload-error" class="error"></p>
+            </div>
+            <br>
+            <div class="button-centering">
+                <button id="cancel-load" class="base_button orange" >Cancelar</button>
+                <button id="upload" class="base_button dark_blue" type="submit" >Subir fichero</button>
+            </div>     
         </dialog>
     </div>

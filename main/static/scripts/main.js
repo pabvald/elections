@@ -4,8 +4,8 @@ let showingDistrict = -1;
 
 
 /**
- * Obtain the content of all the input fields.
- * @return {Object}
+ * Obtains the content of all the input fields.
+ * @return {Object}  an election in the export/import format
  */
 function generateOutput(){
     let output = {
@@ -20,6 +20,20 @@ function generateOutput(){
 }
 
 /**
+ * Sets the content of all the input fields
+ * @param {Object} election an election in the export/import format
+ */
+function generateInput(election) {
+    document.getElementById("election-date").value = election.date;
+    document.getElementById("election-type").value = election.type;
+    document.getElementById("election-threshold").value = election.configuration.threshold;
+    districts = election.districts;
+    updateDistricts();
+    validateElection();
+}
+
+
+/**
  * Hide the candidatures div.
  */
 function hideCandidaturesDiv() {
@@ -28,7 +42,7 @@ function hideCandidaturesDiv() {
 }
 
 /**
- * Show the candidatures div.
+ * Shows the candidatures div.
  */
 function showCandidaturesDiv() {
     let candidaturesDiv = document.getElementById("candidatures");
@@ -36,7 +50,7 @@ function showCandidaturesDiv() {
 }
 
 /**
- * Update the Districts table.
+ * Updates the Districts table.
  */
 function updateDistricts(){
     let districtTable = document.getElementById("district-inside-table");
@@ -108,7 +122,7 @@ function updateDistricts(){
 }
 
 /**
- * Update the Candidatures table.
+ * Updates the Candidatures table.
  */
 function updateCandidatures(){
     let candidatureTable = document.getElementById("candidature-inside-table");
@@ -162,9 +176,8 @@ function updateCandidatures(){
 }
 
 
-
 /**
- * Add the corresponding functionality to the 'Export' button.
+ * Adds the corresponding functionality to the 'Export' button.
  */
 function configureExportButton() {
     let exportButton = document.getElementById("export");
@@ -179,28 +192,9 @@ function configureExportButton() {
     });
 }
 
-/**
- * Add the corresponding functionality to the load-dialog's 
- * elements.
- */
-function configureUploadDialog() {
-    let uploadButton = document.getElementById("load");
-    let uploadDialog = document.getElementById("load-dialog");
-    uploadButton.addEventListener("click", ()=>{
-        uploadDialog.showModal();
-    });
-
-    
-    let cancelLoad = document.getElementById("cancel-load");
-    cancelLoad.addEventListener("click", ()=>{
-        let file = document.getElementById("file");
-        console.log(file.files);
-        //uploadDialog.close(); 
-    });
-}
 
 /**
- * Add the corresponding functionality to the 'Calculate' button.
+ * Adds the corresponding functionality to the 'Calculate' button.
  */
 function configureCalculateButton() {
     let calculateButton = document.getElementById("calculate");
@@ -212,7 +206,7 @@ function configureCalculateButton() {
 
         let form = new FormData();
         form.append("csrfmiddlewaretoken", token);
-        form.append("file",blob);
+        form.append("file", blob);
         form.append("method", "ajax");
 
         let req = new XMLHttpRequest();
@@ -225,7 +219,7 @@ function configureCalculateButton() {
 }
 
 /**
- * Register all the HTML5 dialogs in the PolyFill.
+ * Registers all the HTML5 dialogs in the PolyFill.
  */
 function registerDialogs() {
     let dialogs = document.querySelectorAll("dialog");
@@ -248,8 +242,8 @@ function main(){
     registerDialogs();
     configureNewDistrictDialog();
     configureNewCandidatureDialog();
-    configureExportButton();
     configureUploadDialog();
+    configureExportButton();    
     configureCalculateButton();    
 }
 

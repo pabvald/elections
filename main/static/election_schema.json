@@ -53,7 +53,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1,120}$"
+            "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1 ]){1,120}$"
           },
           "voters": {
             "type": "number",
@@ -88,7 +88,7 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,69}$",
+                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,69}$",
                   "maxLength": 70
                 },
                 "abbr": {
