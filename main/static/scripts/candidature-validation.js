@@ -8,7 +8,8 @@ let CAND_ABRV_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([\wÀ-ÿ\u00f1\u00
 let CAND_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 70 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
 let CAND_ABRV_NAME_ERR_MSG = "'Abreviatura' debe contener entre 1 y 6 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
 let CAND_VOTES_ERR_MSG = "'Votos' debe ser un número mayor o igual que 0";
-
+let CAND_UNIQUE_NAME_ERR_MSG = "Ya existe una candidatura con ese nombre";
+let CAND_UNIQUE_ABBRV_ERR_MSG = "Ya existe una candidatura con esa abreviatura";
 
 /**
  * @return {Boolean} - candidature's name matches pattern
@@ -35,11 +36,58 @@ function validCandVotes() {
  * @return {Boolean} - candidature's blank votes are >= 0
  */
 function validCandidature() {
-    return validCandName() && validCandName() && validCandAbrvName();
+    return validCandName() && uniqueCandidatureName() 
+        && validCandAbrvName()  && uniqueCandidatureAbbrv()&& validCandVotes();
 }
 
 /**
- * 
+ * @return {Boolean} - there's not another candidature with the same name
+ */
+function uniqueCandidatureName() {
+    let candidatures = districts[showingDistrict].candidatures;
+    let unique = true;
+
+    candidatures.forEach((c)=> {
+        if (c.name == val("candidature-name")) {
+            unique = false;
+        }
+    });
+    return unique;
+}
+
+/**
+ * @return {Boolean} - there's not another candidature with the same abbreviate name
+ */
+function uniqueCandidatureAbbrv() {
+    let candidatures = districts[showingDistrict].candidatures;
+    let unique = true;
+
+    candidatures.forEach((c)=> {
+        if (c.abbr == val("candidature-abbrv")) {
+            unique = false;
+        }
+    });
+    return unique;
+}
+
+/**
+ * Clears the candidature dialog's error.
+ */
+function clearCandidatureDialogError() {
+    setCandidatureDialogError("");
+}
+
+/**
+ * Sets the candidature dialog's error
+ * @param {String} error 
+ */
+function setCandidatureDialogError(error) {    
+    let districtError = document.getElementById("dialog-candidature-error");
+    districtError.innerHTML = error;
+}
+
+/**
+ * Validates the candidature dialog.
  */
 function validateCandidature() {
     if (validCandidature()) {
@@ -56,6 +104,9 @@ function validateCandName() {
     if (!validCandName()) {
         addInvalidClass("candidature-name");
         setCandidatureDialogError(CAND_NAME_ERR_MSG);
+    } else if(!uniqueCandidatureName()) {
+        addInvalidClass("candidature-name");
+        setCandidatureDialogError(CAND_UNIQUE_NAME_ERR_MSG);
     } else {
         removeInvalidClass("candidature-name");
         clearCandidatureDialogError();
@@ -70,6 +121,9 @@ function validateCandAbbrvName() {
     if (!validCandAbrvName()) {
         addInvalidClass("candidature-abbrv");
         setCandidatureDialogError(CAND_ABRV_NAME_ERR_MSG);
+    } else if(!uniqueCandidatureAbbrv()) {
+        addInvalidClass("candidature-abbrv");
+        setCandidatureDialogError(CAND_UNIQUE_ABBRV_ERR_MSG);  
     } else {
         removeInvalidClass("candidature-abbrv");
         clearCandidatureDialogError();
@@ -91,18 +145,3 @@ function validateCandVotes() {
     validateCandidature();
 }
 
-/**
- * Clears the candidature dialog's error.
- */
-function clearCandidatureDialogError() {
-    setCandidatureDialogError("");
-}
-
-/**
- * Sets the candidature dialog's error
- * @param {String} error 
- */
-function setCandidatureDialogError(error) {    
-    let districtError = document.getElementById("dialog-candidature-error");
-    districtError.innerHTML = error;
-}

@@ -1,6 +1,6 @@
 
 let districts = []; // Contains all districts
-
+let showingDistrict = -1;
 
 /**
  * Obtains the content of the 'New district' dialog
@@ -33,6 +33,7 @@ function getCandidature() {
     }
     return candidature;
 }
+
 
 /**
  * Obtain the content of all the input fields.
@@ -67,15 +68,37 @@ function showCandidaturesDiv() {
 }
 
 /**
+ * Clears the district dialog's fields.
+ */
+function clearDistrictDialog() {
+    document.getElementById("district-name").value = "";
+    document.getElementById("district-voters").value = "";
+    document.getElementById("district-representatives").value = "";
+    document.getElementById("district-blank").value = "";
+    document.getElementById("district-null").value = "";
+    disableElement("add-district");    
+}
+
+/**
+ * Clears the candidature dialog's fields.
+ */
+function clearCandidatureDialog() {
+    document.getElementById("candidature-name").value = "";
+    document.getElementById("candidature-abbrv").value = "";
+    document.getElementById("candidature-votes").value = "";
+    disableElement("add-candidature");
+}
+
+/**
  * Update the Districts table.
  */
 function updateDistricts(){
     let districtTable = document.getElementById("district-inside-table");
 
-    /* Remove the existing table */ 
+    // Remove the existing table 
     districtTable.remove();
 
-    /* Create a new table */
+    // Create a new table
     districtTable = document.createElement("table");
     districtTable.id = "district-inside-table";
     districtTable.innerHTML = `
@@ -106,7 +129,7 @@ function updateDistricts(){
             <td>${district.representatives}</td>
             <td>${district.blank}</td>
             <td>${district.null}</td>
-            <td><button data-id="${i}" class="view-district">Ver</td>
+            <td><button data-id="${i}" class="view-district">Ver/Añadir</td>
             <td><button data-id="${i}" class="delete-district">Borrar</button></td>
             `;
             districtTable.appendChild(row);
@@ -115,10 +138,8 @@ function updateDistricts(){
         // Configure "View" buttons
         let viewButtons = document.querySelectorAll(".view-district");
         viewButtons.forEach((button)=>{
-            button.addEventListener("click", ()=>{
-                let newCandidature = document.getElementById("new-candidature");
-                newCandidature.disabled = false;
-                newCandidature.dataset.id = button.dataset.id;
+            button.addEventListener("click", ()=>{                
+                showingDistrict =  button.dataset.id;
                 updateCandidatures();
                 showCandidaturesDiv();
             });
@@ -130,6 +151,10 @@ function updateDistricts(){
             button.addEventListener("click", () =>{  
                 districts.splice(button.dataset.id, 1); 
                 updateDistricts();
+                if (button.dataset.id == showingDistrict) {
+                    hideCandidaturesDiv();
+                }
+                validateElectionType();
             });        
         });
     }   
@@ -139,7 +164,6 @@ function updateDistricts(){
  * Update the Candidatures table.
  */
 function updateCandidatures(){
-    let newCandidature = document.getElementById("new-candidature");
     let candidatureTable = document.getElementById("candidature-inside-table");
 
     // Remove the existing table
@@ -158,8 +182,7 @@ function updateCandidatures(){
     document.getElementById("candidature-table").appendChild(candidatureTable);
 
     // Insert each candidature of the corresponding district in a new row
-    let district_id = newCandidature.dataset.id;
-    let candidatures = districts[district_id].candidatures;
+    let candidatures = districts[showingDistrict].candidatures;
 
     if (candidatures.length == 0) {
         let row = document.createElement("tr");
@@ -184,7 +207,7 @@ function updateCandidatures(){
         let deleteButtons = document.querySelectorAll(".delete-candidature");
         deleteButtons.forEach((button)=>{
             button.addEventListener("click",()=>{
-                districts[district_id].candidatures.splice(button.dataset.id, 1);
+                districts[showingDistrict].candidatures.splice(button.dataset.id, 1);
                 updateCandidatures();
             });        
         });
@@ -208,7 +231,9 @@ function configureNewDistrictDialog() {
         let newDistrict = getDistrict();
         districts.push(newDistrict);
         updateDistricts();
-        dialogDistrict.close();       
+        dialogDistrict.close();  
+        clearDistrictDialog();
+        validateElectionType();     
     });
     
     // Configure to the "Cancel" button
@@ -229,7 +254,6 @@ function configureNewDistrictDialog() {
  * elements.
  */
 function configureNewCandidatureDialog() {
-
     // Configure the "New candidature" button, which opens the dialog
     let dialogCandidature = document.getElementById("dialog-candidature");
     let newCandidature = document.getElementById("new-candidature");
@@ -239,10 +263,10 @@ function configureNewCandidatureDialog() {
 
     // Configure the "Add candidature" button
     document.getElementById("add-candidature").addEventListener("click", () => {
-        let dataset = newCandidature.dataset.id;
-        districts[dataset].candidatures.push(getCandidature());
+        districts[showingDistrict].candidatures.push(getCandidature());
         updateCandidatures();
         dialogCandidature.close();
+        clearCandidatureDialog();
     });
 
     // Configure the "Cancel" button
@@ -329,6 +353,11 @@ function registerDialogs() {
  * MAIN PROGRAMM
  */
 function main(){
+    document.getElementById("election-date").addEventListener("input", validateElectionDate);
+    document.getElementById("election-date").addEventListener("cange", validateElectionDate);
+    document.getElementById("election-type").addEventListener("input", validateElectionType);
+    document.getElementById("election-threshold").addEventListener("input", validateElectionThreshold);
+
     registerDialogs();
     configureNewDistrictDialog();
     configureNewCandidatureDialog();

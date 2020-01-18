@@ -2,19 +2,23 @@
         <div id="election" class="election-data-container">
             <ul>            
                 <li>
-                    <label for="election-date"><b>Fecha de las elecciones:</b> </label><input id="election-date" type="date">
+                    <label for="election-date"><b>Fecha de las elecciones:</b> </label>
+                    <input id="election-date" type="date" value="2020-01-01">
                 </li>
                 <li>
                 <label for="election-type"><b>Tipo de elecciones:</b> </label>
                     <select id="election-type">
                         <option value="local">Municipal</option>
                         <option value="regional">Autonómica</option>
-                        <!--<option value="senado">Senado</option>-->
                         <option value="congress">Congreso</option>
                     </select>
                 </li>
                 <li>
-                    <label for="election-threshold"><b>Umbral mínimo de representación:</b> </label><input value="{{ min_votes }}" type="number" id="election-threshold">
+                    <label for="election-threshold"><b>Umbral mínimo de representación:</b> </label>
+                    <input value="{{ min_votes }}" type="number" id="election-threshold" min="0.0" max="1.0" step="0.01">
+                </li>
+                <li>
+                    <p id="election-data-error" class="error"></p>
                 </li>
             </ul>
         </div>
@@ -61,7 +65,7 @@
         </div>
         <div id="candidatures">
             <div class="button-centering">
-                <button disabled id="new-candidature"  class="base_button light_blue">Nueva candidatura</button>
+                <button id="new-candidature"  class="base_button light_blue">Nueva candidatura</button>
             </div>
             <dialog id="dialog-candidature" class="democracy-dialog">                
                 <div class="democracy-dialog-content">

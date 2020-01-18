@@ -4,10 +4,11 @@ let DISTRICT_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1 ]){1,120}$/;
 
 /* Error messages */
 let DISTRICT_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 120 letras,\n mayúsculas o minúsculas";
-let DISTRICT_REP_ERR_MSG = "'Escaños' deben ser mayor o igual que 1 y menor que el censo";
+let DISTRICT_NOT_UNIQUE_ERR_MSG = "Ya existe una circunscripción con este nombre";
+let DISTRICT_REP_ERR_MSG = "'Escaños' deben ser mayor o igual que 1 y menor que el 'Censo'";
 let DISTRICT_VOTERS_ERR_MSG = "'Censo' debe ser un número mayor o igual que 1";
-let DISTRICT_BLANK_ERR_MSG = "'Votos en blanco' deben ser mayor o igual que 0";
-let DISTRICT_NULL_ERR_MSG = "'Votos nulos' deben ser mayor o igual que 0";
+let DISTRICT_BLANK_ERR_MSG = "'Votos en blanco' deben ser mayor o igual que 0 y menor o igual que 'Censo' - 'Votos nulos'";
+let DISTRICT_NULL_ERR_MSG = "'Votos nulos' deben ser mayor o igual que 0 y menor o igual que 'Censo' - 'Votos en blanco'";
 
 
 /**
@@ -54,21 +55,52 @@ function validDistrictRepresentatives() {
  * @return {Boolean} - district's null votes are >= 0
  */
 function validDistrictNull() {
-    return ival("district-null") >= 0;
+    let districtVoters = ival("district-voters");
+    let districtNull = ival("district-null");
+    let districtBlank = ival("district-blank");
+
+    if (isNaN(districtBlank)) {
+        return (districtNull >= 0) && (districtNull <= districtVoters);
+    } else {
+        return (districtNull >= 0) && (districtNull <= (districtVoters - districtBlank));
+    }
+    
 }
 
 /**
  * @return {Boolean} - district's blank votes are >= 0
  */
 function validDistrictBlank() {
-    return ival("district-blank") >= 0;
+    let districtVoters = ival("district-voters");
+    let districtNull = ival("district-null");
+    let districtBlank = ival("district-blank");
+    
+    if (isNaN(districtNull)) {
+        return districtBlank >= 0 && districtBlank <= (districtVoters);
+    } else {
+        return districtBlank >= 0 && districtBlank <= (districtVoters - districtNull);
+    }
+}
+
+/**
+ * @return {Boolean} - there's not another district with the same name.
+ */
+function uniqueDistrict() {
+    let unique = true;
+    let districtName = val("district-name");
+    districts.forEach((d) => {
+        if (d.name == districtName) { 
+            unique = false 
+        }
+    });
+    return unique;
 }
 
 /**
  * @return {Boolean} - district's fields are valid
  */
 function validDistrict() {
-    return validDistrictName() && validDistrictVoters() && validDistrictRepresentatives()
+    return validDistrictName() && uniqueDistrict() && validDistrictVoters() && validDistrictRepresentatives()
             && validDistrictBlank() && validDistrictNull();
 }
 
@@ -91,7 +123,10 @@ function validateDistrictName() {
     if (!validDistrictName()) {
         addInvalidClass("district-name");
         setDistrictDialogError(DISTRICT_NAME_ERR_MSG);
-    } else {
+    } else if(!uniqueDistrict()) {
+        addInvalidClass("district-name");
+        setDistrictDialogError(DISTRICT_NOT_UNIQUE_ERR_MSG);
+    } else{
         removeInvalidClass("district-name");
         clearDistrictDialogError();
     }
@@ -107,9 +142,9 @@ function validateDistrictVoters() {
         setDistrictDialogError(DISTRICT_VOTERS_ERR_MSG);
     } else {
         removeInvalidClass("district-voters");
-        clearDistrictDialogError();
-        validateDistrictRepresentatives();
+        clearDistrictDialogError();        
     }
+    validateDistrict();
 }
 
 
