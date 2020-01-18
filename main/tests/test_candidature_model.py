@@ -1,13 +1,13 @@
 from django.test import TestCase
-from main.models import *
+from main.models import Device, Election, ElectionType, District, Candidature
 import datetime
 
 class CandidatureModelTestCase(TestCase):
     """Candidature model's unit tests"""
 
-    def create_candidature(self, name="CandidatureTest", 
-                                abrv_name="CT", votes=100):
+    def create_candidature(self, name="CandidatureTest", abrv_name="CT", votes=100):
         """Creates a Candidature model for testing"""
+
         device = Device.objects.create(
                             first_access = datetime.date.today(),
                             last_access = datetime.date.today()

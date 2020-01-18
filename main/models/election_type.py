@@ -5,8 +5,9 @@ class ElectionType(models.Model):
     """ElectionType model"""
     
     # Fields
-    name = models.CharField(max_length=20, validators=[RegexValidator(regex=r"^([a-z]|[A-Z]){1,20}$",
-                                                                      message="ElectionType's name can contain only alphabetic characters")])
+    name = models.CharField(max_length=20, 
+                            validators=[RegexValidator(regex=r"^([a-z]|[A-Z]){1,20}$",
+                                                    message="ElectionType's name can contain only alphabetic characters")])
 
     # Methods
     def __str__(self):

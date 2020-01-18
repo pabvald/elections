@@ -30,5 +30,10 @@ class Device(models.Model):
         return self.default_min_votes_threshold
 
     def set_default_min_votes_threshold(self, new_default_min_votes_threshold):
+        if new_default_min_votes_threshold < 0.0:
+            raise ValueError("The default_min_votes_threshold is less than 0")
+        elif new_default_min_votes_threshold > 1.0:
+            raise ValueError("The default_min_votes_threshold is greater than 1")
+
         self.default_min_votes_threshold = new_default_min_votes_threshold 
         

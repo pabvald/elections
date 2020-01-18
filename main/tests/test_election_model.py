@@ -7,7 +7,7 @@ class ElectionModelTestCase(TestCase):
     """Election model's unit tests"""
 
     def create_election(self, type="Local", date=date.today(), min_votes_threshold=0.03):
-        """Creates a District model for testing"""
+        """Creates an Election model for testing"""
         device = Device.objects.create(
                             first_access = date.today(),
                             last_access = date.today()

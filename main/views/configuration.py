@@ -5,10 +5,13 @@ from main.models import Device
 from main.forms import ConfigurationForm
 
 class ConfigurationView(TemplateView):
+    """ ConfigurationView class """
 
     template_name = "configuration/base_configuration.html"
 
     def get(self, request, *args, **kwargs):
+        """ Processes a 'GET' request to /configuration """
+
         context = self.get_context_data( *args, **kwargs)
         device_service = DeviceService(request)
         default_min_votes_threshold = device_service.get_default_configuration()
@@ -17,6 +20,8 @@ class ConfigurationView(TemplateView):
 
 
     def post(self, request, *args, **kwargs):
+        """ Processes a 'POST' request to /configuration """
+
         device_service = DeviceService(request)
         form = ConfigurationForm(request.POST)     
         saved = None 

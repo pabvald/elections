@@ -7,10 +7,14 @@ from main.forms import IndexForm
 import json
 
 class IndexView(TemplateView):
-    
+    """ IndexView class """
+
     template_name ="index/base_index.html"
 
+
     def get (self, request, *args, **kwargs):
+        """ Processes a 'GET' request to / """
+
         context = self.get_context_data( *args, **kwargs)
         device_service = DeviceService(request)
         context["device_id"] = device_service.get_id()
@@ -21,6 +25,8 @@ class IndexView(TemplateView):
 
 
     def post(self, request, *args, **kwargs):
+        """ Processes a 'POST' reuqest to / """
+        
         context = self.get_context_data(*args, **kwargs)
         device_service = DeviceService(request)
         form = IndexForm(request.POST, request.FILES)
