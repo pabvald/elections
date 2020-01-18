@@ -1,4 +1,4 @@
-#pdsc-19-20-02 Pablo Valdunciel Sánchez
+# pdsc-19-20-02 Pablo Valdunciel Sánchez
 
 ### 1. Estructura del proyecto 
 
