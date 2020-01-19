@@ -2,7 +2,7 @@
 
 ### 1. Estructura del proyecto 
 
-A continuación se describre el contenido de cada una de las carpettas de este repositorio:
+A continuación se describe el contenido de cada una de las carpettas de este repositorio:
 
 - **democrazy/**    (contiene los archivos básicos del proyecto Django)
     <br>... 
