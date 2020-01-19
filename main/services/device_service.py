@@ -67,6 +67,7 @@ class DeviceService():
         election_service = ElectionService()
         district_service = DistrictService()
         candidature_service = CandidatureService()
+        
         election = election_service.create_election(type=election_data["type"],
                                                         date=election_data["date"],
                                                         device=device,
