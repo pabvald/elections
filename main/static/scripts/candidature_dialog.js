@@ -1,9 +1,4 @@
 
-/* Patterns */
-let CAND_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ \wÀ-ÿ\u00f1\u00d1-]){0,69}$/;
-let CAND_ABRV_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([\wÀ-ÿ\u00f1\u00d1-]){0,5}$/;
-
-
 /* Error messages */
 let CAND_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 70 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
 let CAND_ABRV_NAME_ERR_MSG = "'Abreviatura' debe contener entre 1 y 6 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
@@ -27,7 +22,7 @@ function configureNewCandidatureDialog() {
 
     // Configure the "Add candidature" button
     document.getElementById("add-candidature").addEventListener("click", () => {
-        districts[showingDistrict].candidatures.push(getCandidature());
+        DISTRICTS[SHOWING_DISTRICT].candidatures.push(getCandidature());
         updateCandidatures();
         dialogCandidature.close();
         clearCandidatureDialog();
@@ -61,94 +56,13 @@ function clearCandidatureDialog() {
  */
 function getCandidature() {
     let candidature = {
-        name: val("candidature-name"),
-        abbr: val("candidature-abbrv"),
+        name: val("candidature-name").trim(),
+        abbrv: val("candidature-abbrv").trim(),
         votes: ival("candidature-votes")
     }
     return candidature;
 }
 
-/**
- * @return {Boolean} - candidature's name matches pattern
- */
-function validCandName() {
-    return CAND_NAME_PATTERN.test(val("candidature-name"));
-}
-
-/**
- * @return {Boolean} - candidature's abbreviate name matches pattern
- */
-function validCandAbrvName() {
-    return CAND_ABRV_NAME_PATTERN.test(val("candidature-abbrv"));
-}
-
-/**
- * Obtains the avaiblable votes in a district.
- * @param {Number} - index of the district
- */
-function availableVotes(i) {
-    let district = districts[i];
-    let candidatures = district.candidatures;
-    let availableVotes = district.voters - district.blank - district.null;
-
-    candidatures.forEach((c) => {
-        availableVotes -= c.votes;
-    });
-
-    return availableVotes;
-}   
-
-/**
- * @return {Boolean} - candidature's votes >= 0
- */
-function validCandVotes() {
-    return ival("candidature-votes") >= 0;
-}
-
-/**
- * @return {Boolean} - candidature's votes <= available votes in its district
- */
-function validCandVotes2() {
-    return ival("candidature-votes") <= availableVotes(showingDistrict);
-}
-
-/**
- * @return {Boolean} - candidature's blank votes are >= 0
- */
-function validCandidature() {
-    return validCandName() && uniqueCandidatureName() 
-        && validCandAbrvName()  && uniqueCandidatureAbbrv()&& validCandVotes();
-}
-
-/**
- * @return {Boolean} - there's not another candidature with the same name
- */
-function uniqueCandidatureName() {
-    let candidatures = districts[showingDistrict].candidatures;
-    let unique = true;
-
-    candidatures.forEach((c)=> {
-        if (c.name == val("candidature-name")) {
-            unique = false;
-        }
-    });
-    return unique;
-}
-
-/**
- * @return {Boolean} - there's not another candidature with the same abbreviate name
- */
-function uniqueCandidatureAbbrv() {
-    let candidatures = districts[showingDistrict].candidatures;
-    let unique = true;
-
-    candidatures.forEach((c)=> {
-        if (c.abbr == val("candidature-abbrv")) {
-            unique = false;
-        }
-    });
-    return unique;
-}
 
 /**
  * Clears the candidature dialog's error.
@@ -170,7 +84,10 @@ function setCandidatureDialogError(error) {
  * Validates the candidature dialog.
  */
 function validateCandidature() {
-    if (validCandidature()) {
+    let candidature = getCandidature();
+    let district = DISTRICTS[SHOWING_DISTRICT];
+
+    if (validCandidature(candidature, district)) {
         enableElement("add-candidature");
     } else {
         disableElement("add-candidature");
@@ -181,10 +98,13 @@ function validateCandidature() {
  * Validates the candidature's name
  */
 function validateCandName() {
-    if (!validCandName()) {
+    let name = val("candidature-name");
+    let allCandidatures = DISTRICTS[SHOWING_DISTRICT].candidatures;
+
+    if (!validCandName(name)) {
         addInvalidClass("candidature-name");
         setCandidatureDialogError(CAND_NAME_ERR_MSG);
-    } else if(!uniqueCandidatureName()) {
+    } else if(!uniqueCandidatureName(name, allCandidatures)) {
         addInvalidClass("candidature-name");
         setCandidatureDialogError(CAND_UNIQUE_NAME_ERR_MSG);
     } else {
@@ -198,10 +118,13 @@ function validateCandName() {
  * Validates the candidature's abbreviate name
  */
 function validateCandAbbrvName() {
-    if (!validCandAbrvName()) {
+    let abbrv = val("candidature-abbrv");
+    let allCandidatures = DISTRICTS[SHOWING_DISTRICT].candidatures;
+
+    if (!validCandAbrvName(abbrv)) {
         addInvalidClass("candidature-abbrv");
         setCandidatureDialogError(CAND_ABRV_NAME_ERR_MSG);
-    } else if(!uniqueCandidatureAbbrv()) {
+    } else if(!uniqueCandidatureAbbrv(abbrv, allCandidatures)) {
         addInvalidClass("candidature-abbrv");
         setCandidatureDialogError(CAND_UNIQUE_ABBRV_ERR_MSG);  
     } else {
@@ -215,10 +138,13 @@ function validateCandAbbrvName() {
  * Validates the candidature's votes
  */
 function validateCandVotes() {
-    if (!validCandVotes()) {
+    let votes = val("candidature-votes");
+    let district = DISTRICTS[SHOWING_DISTRICT];
+
+    if (!validCandVotesBottom(votes)) {
         addInvalidClass("candidature-votes");
         setCandidatureDialogError(CAND_NEG_VOTES_ERR_MSG);
-    } else if(!validCandVotes2()) {
+    } else if(!validCandVotesTop(votes, district)) {
         addInvalidClass("candidature-votes");
         setCandidatureDialogError(CAND_TOP_VOTES_ERR_MSG);
     } else {

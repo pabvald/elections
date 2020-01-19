@@ -1,7 +1,4 @@
 
-/* Patterns */
-let DISTRICT_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1 ]){1,120}$/;
-
 /* Error messages */
 let DISTRICT_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 120 letras,\n mayúsculas o minúsculas";
 let DISTRICT_NOT_UNIQUE_ERR_MSG = "Ya existe una circunscripción con este nombre";
@@ -18,7 +15,7 @@ let DISTRICT_NULL_ERR_MSG = "'Votos nulos' deben ser mayor o igual que 0 y menor
  */
 function getDistrict() {
     let district = {
-        name: val("district-name"),
+        name: val("district-name").trim(),
         voters: ival("district-voters"),
         representatives: ival("district-representatives"),
         blank: ival("district-blank"),
@@ -56,7 +53,7 @@ function configureNewDistrictDialog() {
     // Configure the "Add district" button
     document.getElementById("add-district").addEventListener("click",()=>{
         let newDistrict = getDistrict();
-        districts.push(newDistrict);
+        DISTRICTS.push(newDistrict);
         updateDistricts();
         dialogDistrict.close();  
         clearDistrictDialog();
@@ -92,89 +89,15 @@ function setDistrictDialogError(error) {
     districtError.innerHTML = error;
 }
 
-/**
- * @return {Boolean} - district's name matches pattern
- */
-function validDistrictName() {
-    return DISTRICT_NAME_PATTERN.test(val("district-name"));
-}
-
-/**
- * @return {Boolean} - district's voters are >= 1
- */
-function validDistrictVoters() {
-    return ival("district-voters") >= 1;
-}
-
-/**
- * @return {Boolean} - district's representatives >= 1 and <= district's voters
- */
-function validDistrictRepresentatives() {
-    let districtRepresentatives = ival("district-representatives");
-    let districtVoters = ival("district-voters");
-
-    return (districtRepresentatives <= districtVoters) && (districtRepresentatives >= 1);
-}
-
-/**
- * @return {Boolean} - district's null votes are >= 0
- */
-function validDistrictNull() {
-    let districtVoters = ival("district-voters");
-    let districtNull = ival("district-null");
-    let districtBlank = ival("district-blank");
-
-    if (isNaN(districtBlank)) {
-        return (districtNull >= 0) && (districtNull <= districtVoters);
-    } else {
-        return (districtNull >= 0) && (districtNull <= (districtVoters - districtBlank));
-    }
-    
-}
-
-/**
- * @return {Boolean} - district's blank votes are >= 0
- */
-function validDistrictBlank() {
-    let districtVoters = ival("district-voters");
-    let districtNull = ival("district-null");
-    let districtBlank = ival("district-blank");
-    
-    if (isNaN(districtNull)) {
-        return districtBlank >= 0 && districtBlank <= (districtVoters);
-    } else {
-        return districtBlank >= 0 && districtBlank <= (districtVoters - districtNull);
-    }
-}
-
-/**
- * @return {Boolean} - there's not another district with the same name.
- */
-function uniqueDistrict() {
-    let unique = true;
-    let districtName = val("district-name");
-    districts.forEach((d) => {
-        if (d.name == districtName) { 
-            unique = false 
-        }
-    });
-    return unique;
-}
-
-/**
- * @return {Boolean} - district's fields are valid
- */
-function validDistrict() {
-    return validDistrictName() && uniqueDistrict() && validDistrictVoters() && validDistrictRepresentatives()
-            && validDistrictBlank() && validDistrictNull();
-}
 
 /**
  * Checks if the every field of the district is valid and enables/disables
  * the 'Add district' button.
  */
 function validateDistrict() {
-    if (validDistrict()) {
+    let district = getDistrict();
+
+    if (validDistrict(district, DISTRICTS)) {
         enableElement("add-district");
     } else {
         disableElement("add-district");
@@ -185,10 +108,12 @@ function validateDistrict() {
  * Validates the district's name 
  */
 function validateDistrictName() {
-    if (!validDistrictName()) {
+    let name = val("district-name");
+
+    if (!validDistrictName(name)) {
         addInvalidClass("district-name");
         setDistrictDialogError(DISTRICT_NAME_ERR_MSG);
-    } else if(!uniqueDistrict()) {
+    } else if(!uniqueDistrict(name, DISTRICTS)) {
         addInvalidClass("district-name");
         setDistrictDialogError(DISTRICT_NOT_UNIQUE_ERR_MSG);
     } else{
@@ -202,7 +127,9 @@ function validateDistrictName() {
  * Validates the district's voters
  */
 function validateDistrictVoters() {
-    if (!validDistrictVoters()) {
+    let voters = ival("district-voters");
+
+    if (!validDistrictVoters(voters)) {
         addInvalidClass("district-voters");
         setDistrictDialogError(DISTRICT_VOTERS_ERR_MSG);
     } else {
@@ -217,7 +144,10 @@ function validateDistrictVoters() {
  * Validates the district's representatives
  */
 function validateDistrictRepresentatives() {
-    if (!validDistrictRepresentatives()) {
+    let voters = ival("district-voters");
+    let representatives = ival("district-representatives");
+
+    if (!validDistrictRepresentatives(representatives, voters)) {
         addInvalidClass("district-representatives");
         setDistrictDialogError(DISTRICT_REP_ERR_MSG);
     } else {
@@ -231,7 +161,11 @@ function validateDistrictRepresentatives() {
  * Validates the district's null votes
  */
 function validateDistrictNull() {
-    if (!validDistrictNull()) {
+    let districtVoters = ival("district-voters");
+    let districtNull = ival("district-null");
+    let districtBlank = ival("district-blank");
+
+    if (!validDistrictNull(districtNull, districtVoters, districtBlank)) {
         addInvalidClass("district-null");
         setDistrictDialogError(DISTRICT_NULL_ERR_MSG);
     } else {
@@ -245,7 +179,11 @@ function validateDistrictNull() {
  * Validates the district's null votes
  */
 function validateDistrictBlank() {
-    if (!validDistrictBlank()) {
+    let districtVoters = ival("district-voters");
+    let districtNull = ival("district-null");
+    let districtBlank = ival("district-blank");
+
+    if (!validDistrictBlank(districtBlank, districtVoters, districtNull)) {
         addInvalidClass("district-blank");
         setDistrictDialogError(DISTRICT_BLANK_ERR_MSG);
     } else {

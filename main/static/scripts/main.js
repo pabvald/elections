@@ -1,6 +1,6 @@
 
-let districts = []; // Contains all districts
-let showingDistrict = -1;
+let DISTRICTS = []; // Contains all districts
+let SHOWING_DISTRICT = -1; // The index of the district whose candidatures are being shown.
 
 
 /**
@@ -14,7 +14,7 @@ function generateOutput(){
         configuration: {
             threshold: fval("election-threshold")
         },
-        districts: districts
+        districts: DISTRICTS
     };
     return output;
 }
@@ -73,7 +73,7 @@ function updateDistricts(){
     </tr>`;
     document.getElementById("district-table").appendChild(districtTable);
 
-    if (districts.length == 0) {
+    if (DISTRICTS.length == 0) {
         districtTable.style.display = "none";
         hideCandidaturesDiv();
 
@@ -81,7 +81,7 @@ function updateDistricts(){
         districtTable.style.display = "table";
 
         // Insert each district in a new row
-        districts.forEach((district, i)=>{
+        DISTRICTS.forEach((district, i)=>{
             let row = document.createElement("tr");
             row.innerHTML = `
             <td>${district.name}</td>
@@ -99,9 +99,9 @@ function updateDistricts(){
         let viewButtons = document.querySelectorAll(".view-district");
         viewButtons.forEach((button)=>{
             button.addEventListener("click", ()=>{                
-                showingDistrict =  button.dataset.id;
+                SHOWING_DISTRICT =  button.dataset.id;
                 updateCandidatures();
-                document.getElementById("showing-district-name").innerHTML = districts[showingDistrict].name
+                document.getElementById("showing-district-name").innerHTML = DISTRICTS[SHOWING_DISTRICT].name
                 showCandidaturesDiv();
             });
         });
@@ -110,9 +110,9 @@ function updateDistricts(){
         let deleteButtons = document.querySelectorAll(".delete-district");
         deleteButtons.forEach((button)=>{
             button.addEventListener("click", () =>{  
-                districts.splice(button.dataset.id, 1); 
+                DISTRICTS.splice(button.dataset.id, 1); 
                 updateDistricts();
-                if (button.dataset.id == showingDistrict) {
+                if (button.dataset.id == SHOWING_DISTRICT) {
                     hideCandidaturesDiv();
                 }
                 validateElectionType();
@@ -143,7 +143,7 @@ function updateCandidatures(){
     document.getElementById("candidature-table").appendChild(candidatureTable);
 
     // Insert each candidature of the corresponding district in a new row
-    let candidatures = districts[showingDistrict].candidatures;
+    let candidatures = DISTRICTS[SHOWING_DISTRICT].candidatures;
 
     if (candidatures.length == 0) {
         let row = document.createElement("tr");
@@ -157,7 +157,7 @@ function updateCandidatures(){
             let row = document.createElement("tr");
             row.innerHTML = `
             <td>${candidature.name}</td>
-            <td>${candidature.abbr}</td>
+            <td>${candidature.abbrv}</td>
             <td>${candidature.votes}</td>
             <td><button data-id="${i}" class="delete-candidature">Borrar</button></td>
             `;
@@ -168,7 +168,7 @@ function updateCandidatures(){
         let deleteButtons = document.querySelectorAll(".delete-candidature");
         deleteButtons.forEach((button)=>{
             button.addEventListener("click",()=>{
-                districts[showingDistrict].candidatures.splice(button.dataset.id, 1);
+                DISTRICTS[SHOWING_DISTRICT].candidatures.splice(button.dataset.id, 1);
                 updateCandidatures();
             });        
         });

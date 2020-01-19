@@ -5,6 +5,7 @@ import os
 
 
 class ElectionTestCase(TestCase):
+    
     def setUp(self):
         self.local = ElectionType.objects.create(name="local")
         self.test_device = Device.objects.create(first_access=datetime.datetime.now(), last_access=datetime.datetime.now())

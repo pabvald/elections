@@ -72,13 +72,3 @@ function uploadFile() {
         reader.readAsText(file);    
     }
 }
-
-/**
- * Validates an election object 
- * @param {*} election an election in the export/import format
- */
-function validElectionObject(election) {
-    //TODO
-    return true;
-}
-
