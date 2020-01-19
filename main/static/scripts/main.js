@@ -27,7 +27,7 @@ function generateInput(election) {
     document.getElementById("election-date").value = election.date;
     document.getElementById("election-type").value = election.type;
     document.getElementById("election-threshold").value = election.configuration.threshold;
-    districts = election.districts;
+    DISTRICTS = election.districts;
     updateDistricts();
     validateElection();
 }

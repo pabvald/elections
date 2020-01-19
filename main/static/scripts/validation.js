@@ -10,7 +10,7 @@ let ELECTION_DATE_PATTERN = /^\d{4}-\d{1,2}-\d{1,2}$/;
  * @return {Boolean} - district's name matches pattern
  */
 function validDistrictName(name) {
-    return DISTRICT_NAME_PATTERN.test(name);
+    return name != null && DISTRICT_NAME_PATTERN.test(name);
 }
 
 /**
@@ -18,7 +18,7 @@ function validDistrictName(name) {
  * @return {Boolean} - district's voters are >= 1
  */
 function validDistrictVoters(voters) {
-    return voters >= 1;
+    return voters != null && voters >= 1;
 }
 
 /**
@@ -27,7 +27,8 @@ function validDistrictVoters(voters) {
  * @return {Boolean} - district's representatives >= 1 and <= district's voters
  */
 function validDistrictRepresentatives(representatives, voters) {
-    return (representatives <= voters) && (representatives >= 1);
+    return representatives != null && voters != null 
+            &&(representatives <= voters) && (representatives >= 1);
 }
 
 /**
@@ -37,10 +38,13 @@ function validDistrictRepresentatives(representatives, voters) {
  * @return {Boolean} - district's null votes are >= 0
  */
 function validDistrictNull(nullVotes, voters, blankVotes) {
+
     if (isNaN(blankVotes)) {
-        return (nullVotes >= 0) && (nullVotes <= voters);
+        return nullVotes != null && voters != null 
+            && (nullVotes >= 0) && (nullVotes <= voters);
     } else {
-        return (nullVotes >= 0) && (nullVotes <= (voters - blankVotes));
+        return nullVotes != null && voters != null && blankVotes != null
+            && (nullVotes >= 0) && (nullVotes <= (voters - blankVotes));
     }
     
 }
@@ -53,9 +57,11 @@ function validDistrictNull(nullVotes, voters, blankVotes) {
  */
 function validDistrictBlank(blankVotes, voters, nullVotes) {    
     if (isNaN(nullVotes)) {
-        return blankVotes >= 0 && blankVotes <= (voters);
+        return balnkVotes != null && voters != null 
+            && blankVotes >= 0 && blankVotes <= (voters);
     } else {
-        return blankVotes >= 0 && blankVotes <= (voters - nullVotes);
+        return  nullVotes != null && voters != null && blankVotes != null 
+                && blankVotes >= 0 && blankVotes <= (voters - nullVotes);
     }
 }
 
@@ -64,7 +70,9 @@ function validDistrictBlank(blankVotes, voters, nullVotes) {
  * @param {Array} allDistricts
  * @return {Boolean} - there's not another district with the same name.
  */
-function uniqueDistrict(name, allDistricts) {
+function uniqueDistrict(name, allDistricts) {    
+    if (name == null || allDistricts == null) return false;
+
     let unique = true;
     allDistricts.forEach((d) => {
         if (d.name.trim() == name.trim()) { 
@@ -96,7 +104,7 @@ function validDistrict(district, allDistricts) {
  * @return {Boolean} - candidature's name matches pattern
  */
 function validCandName(name) {
-    return CAND_NAME_PATTERN.test(name);
+    return name != null && CAND_NAME_PATTERN.test(name);
 }
 
 /**
@@ -104,7 +112,7 @@ function validCandName(name) {
  * @return {Boolean} - candidature's abbreviate name matches pattern
  */
 function validCandAbrvName(abbrv) {
-    return CAND_ABRV_NAME_PATTERN.test(abbrv);
+    return abbrv != null && CAND_ABRV_NAME_PATTERN.test(abbrv);
 }
 
 /**
@@ -112,7 +120,7 @@ function validCandAbrvName(abbrv) {
  * @return {Boolean} - candidature's votes >= 0
  */
 function validCandVotesBottom(votes) {
-    return votes >= 0;
+    return votes != null && votes >= 0;
 }
 
 /**
@@ -121,6 +129,8 @@ function validCandVotesBottom(votes) {
  * @return {Boolean} - candidature's votes <= available votes in its district
  */
 function validCandVotesTop(votes, district) {
+    if (votes == null || district == null) return false;
+
     let candidatures = district.candidatures;
     let availableVotes = district.voters - district.blank - district.null;
 
@@ -137,6 +147,8 @@ function validCandVotesTop(votes, district) {
  * @return {Boolean} - candidature's blank votes are >= 0
  */
 function validCandidature(candidature, district) {
+    if (candidature == null || district == null) return false;
+
     let name = candidature.name;
     let abbr = candidature.abbr; 
     let votes = candidature.votes;
@@ -153,6 +165,8 @@ function validCandidature(candidature, district) {
  * @return {Boolean} - there's not another candidature with the same name
  */
 function uniqueCandidatureName(name, allCandidatures) {
+    if (name == null || allCandidatures == null) return false;
+
     let unique = true;
 
     allCandidatures.forEach((c)=> {
@@ -169,8 +183,9 @@ function uniqueCandidatureName(name, allCandidatures) {
  * @return {Boolean} - there's not another candidature with the same abbreviate name
  */
 function uniqueCandidatureAbbrv(abbrv, allCandidatures) {
+    if (abbrv == null || allCandidatures == null) return false;
+    
     let unique = true;
-
     allCandidatures.forEach((c)=> {
         if (c.abbr.trim() == abbrv.trim()) {
             unique = false;
@@ -184,7 +199,7 @@ function uniqueCandidatureAbbrv(abbrv, allCandidatures) {
  * @return {Boolean} - election's date is valid
  */
 function validElectionDate(date) {
-    return ELECTION_DATE_PATTERN.test(date);
+    return date != null && ELECTION_DATE_PATTERN.test(date);
 }
 
 /**
@@ -194,7 +209,7 @@ function validElectionDate(date) {
  * @return {Boolean} - election's type and number of districts are valid
  */
 function validElectionType(type, districts) {
-    return !(type== "local" && districts.length > 1);   
+    return type != null && districts != null && !(type== "local" && districts.length > 1);   
 }
 
 /**
@@ -203,7 +218,7 @@ function validElectionType(type, districts) {
  * @return {Boolean} - election's threshold >= 0 and <= 1.
  */
 function validElectionThreshold(threshold) {
-    return threshold >= 0 && threshold <= 1;
+    return threshold != null && threshold >= 0 && threshold <= 1;
 }
 
 /**
@@ -225,6 +240,36 @@ function validElection(date, type, threshold, districts) {
  * @return {Boolean} - election's data is valid
  */
 function validElectionObject(election) {
-    //TODO
-    return true;
+    let date = election.date;
+    let type = election.type;
+    let threshold = election.configuration.threshold;
+    let districts = election.districts;
+    let valid = true;
+
+    if(!validElection(date, type, threshold, districts)) {
+        valid = false;
+    } 
+
+    for(let i = 0; i < districts.length && valid; i++) {
+        let allDistricts = districts.slice();
+        let district = districts[i];
+        let candidatures = district.candidatures;
+        delete allDistricts[i];
+
+        if (!validDistrict(district, allDistricts)) {
+            valid = false;
+        }
+
+        for (let j = 0; j < district.candidatures.length && valid; j++) {
+            let allCandidatures = candidatures.slice();
+            let candidature = candidatures[j];
+            delete allCandidatures[j];
+            district.candidatures = allCandidatures;
+
+            if (!validCandidature(candidature, district)) {
+                valid = false;
+            }
+        }
+    }
+    return valid;
 }

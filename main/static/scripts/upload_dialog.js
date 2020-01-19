@@ -14,13 +14,15 @@ function configureUploadDialog() {
     let uploadDialog = document.getElementById("load-dialog");
     uploadButton.addEventListener("click", ()=>{
         uploadDialog.showModal();
+
     });
 
     let upload = document.getElementById("upload");   
-    upload.addEventListener("click",uploadFile);
+    upload.addEventListener("click", uploadFile);
 
     let cancelLoad = document.getElementById("cancel-load");
     cancelLoad.addEventListener("click", ()=>{
+        console.log("Closing")
         uploadDialog.close(); 
     });
 }
@@ -45,6 +47,7 @@ function setUploadDialogError(error) {
  * Uploads the specified .json file
  */
 function uploadFile() {
+   
     let uploadDialog = document.getElementById("load-dialog");
     let fileElement = document.getElementById("file");
     let file = fileElement.files[0];
@@ -56,12 +59,10 @@ function uploadFile() {
 
     } else if (!file.type.match(textType)) {
         setUploadDialogError(FILE_TYPE_ERR_MSG);
-
     } else {
         reader = new FileReader();        
         reader.onload = function(e) {
             election = JSON.parse(reader.result);
-            
             if (validElectionObject(election)) {
                 generateInput(election);
                 uploadDialog.close();
