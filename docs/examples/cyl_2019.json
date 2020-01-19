@@ -1,0 +1,455 @@
+{
+  "date": "2019-05-26",
+  "type": "regional",
+  "configuration": {
+    "threshold": 0.03
+  },
+  "districts": [
+    {
+      "name": "Valladolid",
+      "voters": 416771,
+      "representatives": 15,
+      "blank": 2719,
+      "null": 2374,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 102249
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 87055
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 51987
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 20172
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "P-EQUO",
+          "votes": 13703
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 11981
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 1771
+        },
+        {
+          "name": "CI-CCD",
+          "abbrv": "CI-CCD",
+          "votes": 859
+        },
+        {
+          "name": "Unión Regionalista",
+          "abbrv": "UR",
+          "votes": 598
+        },
+        {
+          "name": "Partido Comunista de los Pueblos de España",
+          "abbrv": "PCPE",
+          "votes": 322
+        },
+        {
+          "name": "PCTE",
+          "abbrv": "PCTE",
+          "votes": 284
+        },
+        {
+          "name": "FE de las JONS",
+          "abbrv": "FEJONS",
+          "votes": 247
+        },
+        {
+          "name": "TyF",
+          "abbrv": "TyF",
+          "votes": 190
+        },
+        {
+          "name": "CONTIGO",
+          "abbrv": "CNTIGO",
+          "votes": 138
+        }
+      ]
+    },
+    {
+      "name": "Ávila",
+      "voters": 128922,
+      "representatives": 7,
+      "blank": 866,
+      "null": 1138,
+      "candidatures": [
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 35521
+        },
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 27697
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 12783
+        },
+        {
+          "name": "XAV",
+          "abbrv": "XAV",
+          "votes": 9447
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 5567
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 1285
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 579
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 3761
+        },
+        {
+          "name": "ÁvilaLP",
+          "abbrv": "AvLP",
+          "votes": 552
+        }
+      ]
+    },
+    {
+      "name": "Burgos",
+      "voters": 281417,
+      "representatives": 11,
+      "blank": 2233,
+      "null": 1949,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 71196
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 54032
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 33292
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 13756
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 11800
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 3563
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 1605
+        },
+        {
+          "name": "PCTE",
+          "abbrv": "PCTE",
+          "votes": 430
+        }
+      ]
+    },
+    {
+      "name": "León",
+      "voters": 385140,
+      "representatives": 13,
+      "blank": 2830,
+      "null": 2556,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 91468
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 71024
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 28597
+        },
+        {
+          "name": "Unión del Pueblo Leonés",
+          "abbrv": "UPL",
+          "votes": 26560
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 14119
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 10982
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 4235
+        }
+      ]
+    },
+    {
+      "name": "Palencia",
+      "voters": 134292,
+      "representatives": 7,
+      "blank": 1038,
+      "null": 1024,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 34807
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 33467
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 14626
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 5513
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 4409
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 2030
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 640
+        },
+        {
+          "name": "Unión Regionalista",
+          "abbrv": "UR",
+          "votes": 244
+        },
+        {
+          "name": "FE de las JONS",
+          "abbrv": "FEJONS",
+          "votes": 153
+        }
+      ]
+    },
+    {
+      "name": "Salamanca",
+      "voters": 275350,
+      "representatives": 10,
+      "blank": 1935,
+      "null": 1883,
+      "candidatures": [
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 73439
+        },
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 63413
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 29681
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 9086
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 7524
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 2556
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 1031
+        }
+      ]
+    },
+    {
+      "name": "Segovia",
+      "voters": 116438,
+      "representatives": 6,
+      "blank": 928,
+      "null": 1060,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 28989
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 28790
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 14047
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 4766
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 4535
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 2006
+        }
+      ]
+    },
+    {
+      "name": "Soria",
+      "voters": 69968,
+      "representatives": 5,
+      "blank": 656,
+      "null": 518,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 19732
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 13387
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 5448
+        },
+        {
+          "name": "PPSO",
+          "abbrv": "PPSO",
+          "votes": 3883
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 2434
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 2059
+        }
+      ]
+    },
+    {
+      "name": "Zamora",
+      "voters": 148745,
+      "representatives": 7,
+      "blank": 1355,
+      "null": 1326,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 38374
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 35917
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 14734
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 5386
+        },
+        {
+          "name": "PODEMOS-EQUO",
+          "abbrv": "PDEQUO",
+          "votes": 3677
+        },
+        {
+          "name": "Izquierda Unida",
+          "abbrv": "IU",
+          "votes": 3123
+        },
+        {
+          "name": "AHORA DECIDE",
+          "abbrv": "AD",
+          "votes": 1772
+        }
+      ]
+    }
+  ]
+}

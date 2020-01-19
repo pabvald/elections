@@ -61,14 +61,16 @@ function uploadFile() {
         setUploadDialogError(FILE_TYPE_ERR_MSG);
     } else {
         reader = new FileReader();        
-        reader.onload = function(e) {
-            election = JSON.parse(reader.result);
-            if (validElectionObject(election)) {
-                generateInput(election);
-                uploadDialog.close();
-            } else {
-                setUploadDialogError(FILE_FORMAT_ERR_MSG);
-            }
+        reader.onload = function(e) {           
+            try{
+                election = JSON.parse(reader.result);
+                if (validElectionObject(election)) {
+                    generateInput(election);
+                    uploadDialog.close();
+                }    
+            } catch(error) {
+                setUploadDialogError(FILE_FORMAT_ERR_MSG + "(" + error + ")");
+            }                   
         }
         reader.readAsText(file);    
     }

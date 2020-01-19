@@ -83,7 +83,7 @@ class DeviceService():
             
             #Add candidatures
             for c in d["candidatures"]:
-                candidature_service.create_candidature(abrv_name=c["abbr"],
+                candidature_service.create_candidature(abrv_name=c["abbrv"],
                                                             name=c["name"],
                                                             votes=c["votes"],
                                                             district=district)

@@ -25,7 +25,7 @@ class IndexView(TemplateView):
 
 
     def post(self, request, *args, **kwargs):
-        """ Processes a 'POST' reuqest to / """
+        """ Processes a 'POST' request to / """
         
         context = self.get_context_data(*args, **kwargs)
         device_service = DeviceService(request)
@@ -36,7 +36,8 @@ class IndexView(TemplateView):
             data = request.FILES["file"].read()
             data_json = json.loads(data)
             file_service = FileService()
-            
+
+
             if file_service.is_valid(data_json):
                 election_id = device_service.add_election(data_json)
                 if request.POST["method"] == "ajax":

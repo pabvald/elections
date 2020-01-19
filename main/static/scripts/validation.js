@@ -1,8 +1,8 @@
 
 /* Patterns */
 let DISTRICT_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1 ]){1,120}$/;
-let CAND_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ \wÀ-ÿ\u00f1\u00d1-]){0,69}$/;
-let CAND_ABRV_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([\wÀ-ÿ\u00f1\u00d1-]){0,5}$/;
+let CAND_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ \wÀ-ÿ\u00f1\u00d1-]){0,99}$/;
+let CAND_ABRV_NAME_PATTERN = /^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([\wÀ-ÿ\u00f1\u00d1-]){0,19}$/;
 let ELECTION_DATE_PATTERN = /^\d{4}-\d{1,2}-\d{1,2}$/;
 
 /**
@@ -57,7 +57,7 @@ function validDistrictNull(nullVotes, voters, blankVotes) {
  */
 function validDistrictBlank(blankVotes, voters, nullVotes) {    
     if (isNaN(nullVotes)) {
-        return balnkVotes != null && voters != null 
+        return blankVotes != null && voters != null 
             && blankVotes >= 0 && blankVotes <= (voters);
     } else {
         return  nullVotes != null && voters != null && blankVotes != null 
@@ -121,6 +121,7 @@ function validCandAbrvName(abbrv) {
  */
 function validCandVotesBottom(votes) {
     return votes != null && votes >= 0;
+    
 }
 
 /**
@@ -150,12 +151,12 @@ function validCandidature(candidature, district) {
     if (candidature == null || district == null) return false;
 
     let name = candidature.name;
-    let abbr = candidature.abbr; 
+    let abbrv = candidature.abbrv; 
     let votes = candidature.votes;
     let allCandidatures = district.candidatures;
 
     return validCandName(name) && uniqueCandidatureName(name, allCandidatures) 
-        && validCandAbrvName(abbr)  && uniqueCandidatureAbbrv(abbr, allCandidatures) 
+        && validCandAbrvName(abbrv)  && uniqueCandidatureAbbrv(abbrv, allCandidatures) 
         && validCandVotesTop(votes, district) && validCandVotesBottom(votes);
 }
 
@@ -187,7 +188,7 @@ function uniqueCandidatureAbbrv(abbrv, allCandidatures) {
     
     let unique = true;
     allCandidatures.forEach((c)=> {
-        if (c.abbr.trim() == abbrv.trim()) {
+        if (c.abbrv.trim() == abbrv.trim()) {
             unique = false;
         }
     });

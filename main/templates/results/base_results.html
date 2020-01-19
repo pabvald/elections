@@ -41,7 +41,7 @@
                             {%for candidature in results.global.candidatures %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{candidature.abrv_name}} - {{candidature.name}}</td>
+                                <td>{{candidature.name}} ({{candidature.abrv_name}})</td>
                                 <td>{{candidature.seats}}</td>
                                 <td>{{candidature.votes}}</td>
                                 <td>{{candidature.votes_percentage|floatformat:4}}</td>

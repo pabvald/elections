@@ -82,18 +82,18 @@
               "additionalProperties": false,
               "required": [
                 "name",
-                "abbr",
+                "abbrv",
                 "votes"
               ],
               "properties": {
                 "name": {
                   "type": "string",
-                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,69}$",
+                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([ a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,99}$",
                   "maxLength": 70
                 },
-                "abbr": {
+                "abbrv": {
                   "type": "string",
-                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,5}$"
+                  "pattern": "^([a-zA-ZÀ-ÿ\u00f1\u00d1]){1}([a-zA-Z0-9À-ÿ\u00f1\u00d1-]|_){0,19}$"
                 },
                 "votes": {
                   "type": "number",

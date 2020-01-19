@@ -183,7 +183,9 @@ function configureExportButton() {
     let exportButton = document.getElementById("export");
     exportButton.addEventListener("click", ()=>{
         let output = generateOutput();
-        let json = JSON.stringify(output, null,2);
+        console.log(output.districts[3]);
+        let json = JSON.stringify(output);  //JSON.stringify(output, undefined, 2);
+        json = json.replace(/,null/g, "");
         let a = document.createElement("a");
         let blob = new Blob([json], {type: "application/json"});
         a.href = window.URL.createObjectURL(blob);
@@ -202,6 +204,7 @@ function configureCalculateButton() {
         let token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
         let output = generateOutput();
         let json = JSON.stringify(output);
+        json = json.replace(/,null/g, "");
         let blob = new Blob([json], {type: "application/json"});
 
         let form = new FormData();
@@ -212,9 +215,10 @@ function configureCalculateButton() {
         let req = new XMLHttpRequest();
         req.open("POST", "/");
         req.send(form);
-        req.addEventListener("load",()=>{
+        req.addEventListener("load", ()=>{
+            console.log(req.response);
             window.location.href = "/results/" + req.response;
-        })
+        });
     });
 }
 

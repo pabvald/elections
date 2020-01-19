@@ -138,7 +138,7 @@ function validateCandAbbrvName() {
  * Validates the candidature's votes
  */
 function validateCandVotes() {
-    let votes = val("candidature-votes");
+    let votes = ival("candidature-votes");
     let district = DISTRICTS[SHOWING_DISTRICT];
 
     if (!validCandVotesBottom(votes)) {
