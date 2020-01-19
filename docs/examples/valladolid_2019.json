@@ -1,0 +1,83 @@
+{
+  "date": "2019-05-26",
+  "type": "local",
+  "configuration": {
+    "threshold": 0.03
+  },
+  "districts": [
+    {
+      "name": "Valladolid",
+      "voters": 245064,
+      "representatives": 27,
+      "blank": 1131,
+      "null": 916,
+      "candidatures": [
+        {
+          "name": "Partido Socialista Obrero Español",
+          "abbrv": "PSOE",
+          "votes": 59981
+        },
+        {
+          "name": "Partido Popular",
+          "abbrv": "PP",
+          "votes": 50522
+        },
+        {
+          "name": "Ciudadanos",
+          "abbrv": "Cs",
+          "votes": 21122
+        },
+        {
+          "name": "TOMA LA PALABRA",
+          "abbrv": "TLP",
+          "votes": 17754
+        },
+        {
+          "name": "VOX",
+          "abbrv": "VOX",
+          "votes": 10665
+        },
+        {
+          "name": "PODEMOS",
+          "abbrv": "PD",
+          "votes": 5016
+        },
+        {
+          "name": "PACMA",
+          "abbrv": "PACMA",
+          "votes": 831
+        },
+        {
+          "name": "SAIn",
+          "abbrv": "SAIn",
+          "votes": 319
+        },
+        {
+          "name": "PCAS-TC-PACTO",
+          "abbrv": "PCAS-TC-PACTO",
+          "votes": 286
+        },
+        {
+          "name": "PCTE",
+          "abbrv": "PCTE",
+          "votes": 229
+        },
+        {
+          "name": "CI-CCD",
+          "abbrv": "CI-CCD",
+          "votes": 205
+        },
+        {
+          "name": "CONTIGO",
+          "abbrv": "CONTIGO",
+          "votes": 169
+        },
+        {
+          "name": "Unión Regionalista",
+          "abbrv": "UR",
+          "votes": 126
+        }
+      ]
+    }
+  ]
+}

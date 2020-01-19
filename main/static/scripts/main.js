@@ -183,9 +183,11 @@ function configureExportButton() {
     let exportButton = document.getElementById("export");
     exportButton.addEventListener("click", ()=>{
         let output = generateOutput();
-        console.log(output.districts[3]);
-        let json = JSON.stringify(output);  //JSON.stringify(output, undefined, 2);
-        json = json.replace(/,null/g, "");
+        // Remove 'nulls' introduced by stringfy
+        output = JSON.stringify(output);      
+        output = output.replace(/,null/g, "");
+        output = JSON.parse(output);
+        let json = JSON.stringify(output, undefined, 2);
         let a = document.createElement("a");
         let blob = new Blob([json], {type: "application/json"});
         a.href = window.URL.createObjectURL(blob);

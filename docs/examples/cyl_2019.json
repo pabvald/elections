@@ -76,11 +76,6 @@
           "name": "TyF",
           "abbrv": "TyF",
           "votes": 190
-        },
-        {
-          "name": "CONTIGO",
-          "abbrv": "CNTIGO",
-          "votes": 138
         }
       ]
     },
@@ -130,11 +125,6 @@
           "name": "PODEMOS-EQUO",
           "abbrv": "PDEQUO",
           "votes": 3761
-        },
-        {
-          "name": "ÁvilaLP",
-          "abbrv": "AvLP",
-          "votes": 552
         }
       ]
     },
@@ -179,11 +169,6 @@
           "name": "PACMA",
           "abbrv": "PACMA",
           "votes": 1605
-        },
-        {
-          "name": "PCTE",
-          "abbrv": "PCTE",
-          "votes": 430
         }
       ]
     },
@@ -223,11 +208,6 @@
           "name": "VOX",
           "abbrv": "VOX",
           "votes": 10982
-        },
-        {
-          "name": "Izquierda Unida",
-          "abbrv": "IU",
-          "votes": 4235
         }
       ]
     },
@@ -277,11 +257,6 @@
           "name": "Unión Regionalista",
           "abbrv": "UR",
           "votes": 244
-        },
-        {
-          "name": "FE de las JONS",
-          "abbrv": "FEJONS",
-          "votes": 153
         }
       ]
     },
@@ -321,11 +296,6 @@
           "name": "Izquierda Unida",
           "abbrv": "IU",
           "votes": 2556
-        },
-        {
-          "name": "PACMA",
-          "abbrv": "PACMA",
-          "votes": 1031
         }
       ]
     },
@@ -360,11 +330,6 @@
           "name": "PODEMOS-EQUO",
           "abbrv": "PDEQUO",
           "votes": 4535
-        },
-        {
-          "name": "Izquierda Unida",
-          "abbrv": "IU",
-          "votes": 2006
         }
       ]
     },
@@ -399,11 +364,6 @@
           "name": "PODEMOS-EQUO",
           "abbrv": "PDEQUO",
           "votes": 2434
-        },
-        {
-          "name": "VOX",
-          "abbrv": "VOX",
-          "votes": 2059
         }
       ]
     },
@@ -443,11 +403,6 @@
           "name": "Izquierda Unida",
           "abbrv": "IU",
           "votes": 3123
-        },
-        {
-          "name": "AHORA DECIDE",
-          "abbrv": "AD",
-          "votes": 1772
         }
       ]
     }

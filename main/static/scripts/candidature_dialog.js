@@ -1,7 +1,7 @@
 
 /* Error messages */
-let CAND_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 70 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
-let CAND_ABRV_NAME_ERR_MSG = "'Abreviatura' debe contener entre 1 y 6 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
+let CAND_NAME_ERR_MSG = "'Nombre' debe contener entre 1 y 100 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
+let CAND_ABRV_NAME_ERR_MSG = "'Abreviatura' debe contener entre 1 y 20 caracteres (A-Z, a-z, 0-9, _, -), comenzando con una letra";
 let CAND_NEG_VOTES_ERR_MSG = "'Votos' debe ser un número mayor o igual que 0";
 let CAND_TOP_VOTES_ERR_MSG = "'Votos' debe ser menor o igual que el número de votos disponibles en la circunscripción";
 let CAND_UNIQUE_NAME_ERR_MSG = "Ya existe una candidatura con ese nombre";
