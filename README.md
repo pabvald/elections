@@ -31,15 +31,16 @@ A continuación se describre el contenido de cada una de las carpettas de este r
     - **templates/**  (contiene los ficheros HTML + DTL)
     - **tests/** (contiene los test unitarios que se han llegado a implementar)
     - **views/** (contiene los ficheros *Python* con las *views* de Django)
+    <br> ...
 - **db.sqlite** (fichero  que contiene la BD SQLite3)
 - **Dockerfile** (contruye los contenedores docker, tanto el de Dajndo como el del servidor web nginx necesario para desplegar la aplicación)
 - **docker-compose.yml** (define el uso de los contenedores docker)
 - **docker-requirements** (fichero de texto que contiene las dependencias de instalación de los contenedores docker)
 - **manage.py** (fichero propio de Django y sirve para administrar la aplicación a través de una interfaz unificada)
 - **nginx.conf** (archivo de configuración del servidor web nginx)
-- **run-coverage.sh**
-- **run-lint.sh**
-- **run-test.sh**
+- **run-coverage.sh** (ejecuta los test que haya en el directorio *main/tests/* y proporciona un informe de la cobertura de dichos test)
+- **run-lint.sh**   (ejecuta la herramienta *flake8* para evaluar la calidad del código escrito)
+- **run-test.sh** (ejecuta los test que haya en el directorio *main/tests/*)
 
 ### 2. Ejecución del sistema
 Para ejecutar el proyecto hace falta instalar 
@@ -48,7 +49,7 @@ Para ejecutar el proyecto hace falta instalar
 
 Una vez instalados y clonado el repositorio, es necesario ejecutar los siguientes pasos para arrancar el sistema:
 
-1. Acceder a la carpeta del repositorio
+1. A través de una consola, acceder a la carpeta del repositorio
 2. Ejecutar el comando
 
 ```
@@ -60,4 +61,14 @@ localhost:8080
 ```
 
 ### 3. Ejecución de los ficheros *.sh* 
+
+Una vez ejectudo el sistema, para poder ejecutar alguno de los ficheros *.sh* es necesario seguir los siguientes pasos:
+
+1.  A través de una consola, acceder a la carpeta del repositorio
+2.  Ejecutar el siguiente comando para que el correspondiente fichero .sh se ejecute en el contenedor *docker* de Django:
+
+```
+docker-compose exec django run-****.sh 
+``` 
+
 
