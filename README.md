@@ -11,7 +11,7 @@ The following describes the content of each of the carpets in this repository:
                 <br>- **2-analysis/**
                 <br>- **3-design/** 
                 <br>- **4-plan_driven/** 
-    - **examples/** (contains two example *.jon* files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
+    - **examples/** (contains two example *.jon* files with the data of a regional and a municipal election. Both files can be loaded into the system)
                 <br> - *cyl_2019.json*
                 <br> - *valladolid_2019.json*
     - **schema/**
