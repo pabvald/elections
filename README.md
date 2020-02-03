@@ -7,10 +7,10 @@ The following describes the content of each of the carpets in this repository:
     
 - **docs/**
     - **deliverables/** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
-      - **1-requirements/**
-      - **2-analysis/**
-      - **3-design/**
-      - **4-plan_driven/**
+        - **1-requirements/**
+        - **2-analysis/**
+        - **3-design/**
+        - **4-plan_driven/**
     - **examples/** (contains two example *.jon* files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
         - *cyl_2019.json*
         - *valladolid_2019.json*
@@ -20,16 +20,18 @@ The following describes the content of each of the carpets in this repository:
         - *uml-models.asta* (analysis and design models in a single file *.asta*)
 - **main/**
   - **forms/** (contains the * Python * files with the * forms * of Django)
-  - **migrations/** (contains files in which all the changes that have been made to the logical design of the BD since the        creation of the project are registered)
-  - **models/* (contains the * Python * files that implement the * models * of Django)
-  - **services/** (contains the * Python * files that implement the services)
-  - **static/**
-        - **photos/** (contains the photos included in the HTML files)
-        - **scripts/** (contains * JavaScript * files that give dynamism to HTML pages)
-        - **styles/** (contains * CSS * style files that modify the appearance of HTML pages)
-  - **templates/** (contains HTML + DTL files)
-  - **tests/** (contains the unit tests that have been implemented)
-  - **views/** (contains the * Python * files with the * views * of Django)
+  
+  - **migrations/** (contains files in which all the changes that have been made to the logical design of the BD since the creation of the project are registered)
+  - **models/** (contains the *Python* files that implement the * models * of Django)
+  - **services/** (contains the * Python * files that implement the services)
+  - **static/**
+        - **photos/** (contains the photos included in the HTML files)
+        - **scripts/** (contains * JavaScript * files that give dynamism to HTML pages)
+        - **styles/** (contains * CSS * style files that modify the appearance of HTML pages)
+  - **templates/** (contains HTML + DTL files)
+  - **tests/** (contains the unit tests that have been implemented)
+  - **views/** (contains the * Python * files with the * views * of Django)
+  
     <br> ...
 - **db.sqlite** (file containing the SQLite3 database)
 - **Dockerfile** (builds the docker containers, both the Dajndo and the nginx web server needed to deploy the application)
