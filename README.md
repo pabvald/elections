@@ -6,18 +6,18 @@ The following describes the content of each of the carpets in this repository:
     <br> ...
     
 - **docs/**
-    - **deliverables/** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
-        - **1-requirements/**
-        - **2-analysis/**
-        - **3-design/**
-        - **4-plan_driven/**
-    - **examples/** (contains two example *.jon* files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
-        - *cyl_2019.json*
-        - *valladolid_2019.json*
-    - **scema/**
-        - *election_schema.json* (schema that specifies the format that the .json files that are used to import / export data in the system must have)
-    - **uml-models/**:
-        - *uml-models.asta* (analysis and design models in a single file *.asta*)
+    - **deliverables/** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
+            <br>- **1-requirements/**
+            <br>- **2-analysis/**
+            <br>- **3-design/** 
+            <br>- **4-plan_driven/** 
+    - **examples/** (contains two example *.jon* files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
+            <br> - *cyl_2019.json*
+            <br> - *valladolid_2019.json*
+    - **schema/**
+            <br> - *election_schema.json* (schema that specifies the format that the .json files that are used to import / export data in the system must have)
+    - **uml-models/**:
+            <br> - *uml-models.asta* (analysis and design models in a single file *.asta*)
 - **main/**
   - **forms/** (contains the * Python * files with the * forms * of Django)
   
@@ -31,7 +31,6 @@ The following describes the content of each of the carpets in this repository:
   - **templates/** (contains HTML + DTL files)
   - **tests/** (contains the unit tests that have been implemented)
   - **views/** (contains the * Python * files with the * views * of Django)
-  
     <br> ...
 - **db.sqlite** (file containing the SQLite3 database)
 - **Dockerfile** (builds the docker containers, both the Dajndo and the nginx web server needed to deploy the application)
