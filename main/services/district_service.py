@@ -26,7 +26,7 @@ class DistrictService():
 		return candidatures
 
 
-	def get_seat_distribution(self, district, min_votes_thres
+	def get_seat_distribution(self, district, min_votes_threshold):
 		""" Obtains the seat distribution of a district applying the D'hont system """
 
 		candidatures = []
