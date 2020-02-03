@@ -4,31 +4,32 @@ The following describes the content of each of the carpets in this repository:
 
 - **democrazy/** (contains the basic files of the Django project)
     <br> ...
+    
 - **docs/**
-    - ** deliverables / ** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
-        - ** 1-requirements / **
-        - ** 2-analysis / **
-        - ** 3-design / **
-        - ** 4-plan_driven / **
+    - **deliverables/** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
+      - **1-requirements/**
+      - **2-analysis/**
+      - **3-design/**
+      - **4-plan_driven/**
     - **examples/** (contains two example *.jon* files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
         - *cyl_2019.json*
         - *valladolid_2019.json*
-    - **schema/**
+    - **scema/**
         - *election_schema.json* (schema that specifies the format that the .json files that are used to import / export data in the system must have)
-    - **uml-models /**:
-        - * uml-models.asta * (analysis and design models in a single file * .asta *)
+    - **uml-models/**:
+        - *uml-models.asta* (analysis and design models in a single file *.asta*)
 - **main/**
-    - **forms/** (contains the * Python * files with the * forms * of Django)
-    - **migrations/** (contains files in which all the changes that have been made to the logical design of the BD since the creation of the project are registered)
-    - **models/* (contains the * Python * files that implement the * models * of Django)
-    - **services/** (contains the * Python * files that implement the services)
-    - **static/**
+  - **forms/** (contains the * Python * files with the * forms * of Django)
+  - **migrations/** (contains files in which all the changes that have been made to the logical design of the BD since the        creation of the project are registered)
+  - **models/* (contains the * Python * files that implement the * models * of Django)
+  - **services/** (contains the * Python * files that implement the services)
+  - **static/**
         - **photos/** (contains the photos included in the HTML files)
         - **scripts/** (contains * JavaScript * files that give dynamism to HTML pages)
         - **styles/** (contains * CSS * style files that modify the appearance of HTML pages)
-    - **templates/** (contains HTML + DTL files)
-    - **tests/** (contains the unit tests that have been implemented)
-    - **views/** (contains the * Python * files with the * views * of Django)
+  - **templates/** (contains HTML + DTL files)
+  - **tests/** (contains the unit tests that have been implemented)
+  - **views/** (contains the * Python * files with the * views * of Django)
     <br> ...
 - **db.sqlite** (file containing the SQLite3 database)
 - **Dockerfile** (builds the docker containers, both the Dajndo and the nginx web server needed to deploy the application)
@@ -50,13 +51,14 @@ Once the repository is installed and cloned, it is necessary to perform the foll
 1. Through a console, access the repository folder
 2. Execute the command
 
-``
+```
 docker-compose up --build
-``
+```
+
 3. Open the browser and go to the address
-``
+```
 localhost: 8080
-``
+```
 
 ### 3. Execution of the *.sh* files
 
@@ -65,7 +67,7 @@ Once the system is executed, to be able to execute any of the * .sh * files it i
 1. Through a console, access the repository folder
 2. Execute the following command so that the corresponding .sh file is executed in the Django * docker * container:
 
-``
+```
 docker-compose exec django run - ****. sh
-``
+```
 
