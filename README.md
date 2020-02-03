@@ -1,74 +1,71 @@
-# pdsc-19-20-02 Pablo Valdunciel Sánchez
+### 1. Project structure
 
-### 1. Estructura del proyecto 
+The following describes the content of each of the carpets in this repository:
 
-A continuación se describe el contenido de cada una de las carpettas de este repositorio:
+- ** democrazy / ** (contains the basic files of the Django project)
+    <br> ...
+- ** docs / **
+    - ** deliverables / ** (contains each of the deliverables made to meet milestones 1, 2, 3 and 4)
+        - ** 1-requirements / **
+        - ** 2-analysis / **
+        - ** 3-design / **
+        - ** 4-plan_driven / **
+    - ** examples / ** (contains two example * .jon * files with the data of an autonomous and a municipal election. Both files can be loaded into the system)
+        - * cyl_2019.json *
+        - * valladolid_2019.json *
+    - ** schema / **
+        - * election_schema.json * (schema that specifies the format that the .json files that are used to import / export data in the system must have)
+    - ** uml-models / **:
+        - * uml-models.asta * (analysis and design models in a single file * .asta *)
+- ** main / **
+    - ** forms / ** (contains the * Python * files with the * forms * of Django)
+    - ** migrations / ** (contains files in which all the changes that have been made to the logical design of the BD since the creation of the project are registered)
+    - ** models / * (contains the * Python * files that implement the * models * of Django)
+    - ** services / ** (contains the * Python * files that implement the services)
+    - ** static / **
+        - ** photos / ** (contains the photos included in the HTML files)
+        - ** scripts / ** (contains * JavaScript * files that give dynamism to HTML pages)
+        - ** styles / ** (contains * CSS * style files that modify the appearance of HTML pages)
+    - ** templates / ** (contains HTML + DTL files)
+    - ** tests / ** (contains the unit tests that have been implemented)
+    - ** views / ** (contains the * Python * files with the * views * of Django)
+    <br> ...
+- ** db.sqlite ** (file containing the SQLite3 database)
+- ** Dockerfile ** (builds the docker containers, both the Dajndo and the nginx web server needed to deploy the application)
+- ** docker-compose.yml ** (defines the use of docker containers)
+- ** docker-requirements ** (text file containing the installation dependencies of docker containers)
+- ** manage.py ** (Django's own file and serves to manage the application through a unified interface)
+- ** nginx.conf ** (web server configuration file nginx)
+- ** run-coverage.sh ** (run the tests in the * main / tests / * directory and provide a report of the coverage of those tests)
+- ** run-lint.sh ** (run the * flake8 * tool to evaluate the quality of the written code)
+- ** run-test.sh ** (run the tests in the * main / tests / * directory)
 
-- **democrazy/**    (contiene los archivos básicos del proyecto Django)
-    <br>... 
-- **docs/** 
-    - **deliverables/** (contiene cada uno de los entregables realizados para cumplir los hitos 1, 2, 3 y 4)
-        - **1-requirements/**
-        - **2-analysis/**
-        - **3-design/**
-        - **4-plan_driven/**
-    - **examples/** (contiene dos ficheros *.jon* de ejemplo con los datos de unas elecciones autonómicas y una municipales. Ambos ficheros pueden cargarse en el sistema)
-        - *cyl_2019.json*
-        - *valladolid_2019.json*
-    - **schema/**
-        - *election_schema.json* (schema que especifica el formato que deben tener los ficheros .json que se utilizan para importar/exportar datos en el sistema)
-    - **uml-models/**:
-        - *uml-models.asta* (modelos de análisis y diseño en un sólo fichero *.asta*)
-- **main/**
-    - **forms/**    (contiene los ficheros *Python* con los *forms* de Django)
-    - **migrations/** (contiene ficheros en los que se están registrados todos los cambios que se han realizado al diseño lógico de la BD desde la creación del proyecto)
-    - **models/*    (contiene los ficheros *Python* que implementan los *models* de Django)
-    - **services/** (contiene los ficheros *Python* que implementan los servicios)
-    - **static/**
-        - **photos/**   (contiene las fotos incluidas en los ficheros HTML)
-        - **scripts/**  (contiene los ficheros *JavaScript* que dan dinamismo a las páginas HTML)
-        - **styles/**    (contiene los ficheros *CSS* de estilo que modifican el aspecto de las páginas HTML)
-    - **templates/**  (contiene los ficheros HTML + DTL)
-    - **tests/** (contiene los test unitarios que se han llegado a implementar)
-    - **views/** (contiene los ficheros *Python* con las *views* de Django)
-    <br> ...
-- **db.sqlite** (fichero  que contiene la BD SQLite3)
-- **Dockerfile** (contruye los contenedores docker, tanto el de Dajndo como el del servidor web nginx necesario para desplegar la aplicación)
-- **docker-compose.yml** (define el uso de los contenedores docker)
-- **docker-requirements** (fichero de texto que contiene las dependencias de instalación de los contenedores docker)
-- **manage.py** (fichero propio de Django y sirve para administrar la aplicación a través de una interfaz unificada)
-- **nginx.conf** (archivo de configuración del servidor web nginx)
-- **run-coverage.sh** (ejecuta los test que haya en el directorio *main/tests/* y proporciona un informe de la cobertura de dichos test)
-- **run-lint.sh**   (ejecuta la herramienta *flake8* para evaluar la calidad del código escrito)
-- **run-test.sh** (ejecuta los test que haya en el directorio *main/tests/*)
-
-### 2. Ejecución del sistema
-Para ejecutar el proyecto hace falta instalar 
+### 2. System execution
+To execute the project you need to install
 - Docker (https://docs.docker.com/install/)
 - Docker Compose (https://docs.docker.com/compose/install/)
 
-Una vez instalados y clonado el repositorio, es necesario ejecutar los siguientes pasos para arrancar el sistema:
+Once the repository is installed and cloned, it is necessary to perform the following steps to boot the system:
 
-1. A través de una consola, acceder a la carpeta del repositorio
-2. Ejecutar el comando
+1. Through a console, access the repository folder
+2. Execute the command
 
-```
+``
 docker-compose up --build
-```
-3. Abrir el navegador e ir a la dirección
-```
-localhost:8080
-```
+``
+3. Open the browser and go to the address
+``
+localhost: 8080
+``
 
-### 3. Ejecución de los ficheros *.sh* 
+### 3. Execution of the * .sh * files
 
-Una vez ejectudo el sistema, para poder ejecutar alguno de los ficheros *.sh* es necesario seguir los siguientes pasos:
+Once the system is executed, to be able to execute any of the * .sh * files it is necessary to follow the following steps:
 
-1.  A través de una consola, acceder a la carpeta del repositorio
-2.  Ejecutar el siguiente comando para que el correspondiente fichero .sh se ejecute en el contenedor *docker* de Django:
+1. Through a console, access the repository folder
+2. Execute the following command so that the corresponding .sh file is executed in the Django * docker * container:
 
-```
-docker-compose exec django run-****.sh 
-``` 
-
+``
+docker-compose exec django run - ****. sh
+``
 
