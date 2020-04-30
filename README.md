@@ -42,7 +42,7 @@ To execute the project you need to install
 - Docker (https://docs.docker.com/install/)
 - Docker Compose (https://docs.docker.com/compose/install/)
 
-Once the repository is installed and cloned, it is necessary to perform the following steps to boot the system:
+Once the abovementioned is installed , it is necessary to perform the following steps to boot the system:
 
 1. Through a console, access the repository folder
 2. Execute the command
